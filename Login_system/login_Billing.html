@@ -1,0 +1,230 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Rajan Printing Press</title>
+
+    <link rel="stylesheet" href="{% static 'login_Billing.css' %}">
+    <script src="{% static 'login_Billing.js' %}" defer></script>
+</head>
+<body>
+
+<main class="auth-page">
+
+    <!-- Login / Signup switch -->
+    <button class="mode-switch" id="modeSwitch" type="button"
+            aria-label="Switch between Login and Sign Up">
+        <span class="switch-icon" id="switchIcon" aria-hidden="true">♙+</span>
+        <span id="modeSwitchText">Sign Up</span>
+        <span class="switch-arrow" aria-hidden="true">›</span>
+    </button>
+
+    <section class="auth-content" aria-labelledby="formTitle">
+
+        <div class="user-badge" aria-hidden="true"><span>♟</span></div>
+
+        <header class="form-heading">
+            <h1 id="formTitle">Welcome Back</h1>
+            <p id="formSubtitle">Login to Rajan Printing Press Billing System</p>
+        </header>
+
+        <!-- ================= LOGIN FORM ================= -->
+        <form id="loginForm" class="auth-form" method="post" action="{% url 'login_billing' %}" novalidate>
+            {% csrf_token %}
+
+            <label class="field">
+                <span class="field-icon" aria-hidden="true">♟</span>
+                <input id="loginIdentity" name="username" type="text"
+                       placeholder="Username / Email / Mobile Number"
+                       autocomplete="username" required>
+            </label>
+            <small class="error-message" id="loginIdentityError" aria-live="polite"></small>
+
+            <label class="field">
+                <span class="field-icon" aria-hidden="true">▣</span>
+                <input id="loginPassword" name="password" type="password"
+                       placeholder="Password" autocomplete="current-password" required>
+                <button class="toggle-password" type="button"
+                        data-password-target="loginPassword"
+                        aria-label="Show password">◉</button>
+            </label>
+            <small class="error-message" id="loginPasswordError" aria-live="polite"></small>
+
+            <div class="form-options form-options-right">
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+            </div>
+
+            <button class="primary-button" type="submit">
+                <span aria-hidden="true">➜</span> Login
+            </button>
+
+            <div class="divider"><span>OR</span></div>
+
+            <div class="social-row">
+                <button type="button" class="social-button">
+                    <span class="google-icon" aria-hidden="true">G</span>
+                    Login with Google
+                </button>
+                <button type="button" class="social-button">
+                    <span class="otp-icon" aria-hidden="true">▦</span>
+                    Login with OTP
+                </button>
+            </div>
+        </form>
+
+        <!-- ================= SIGNUP FORM ================= -->
+        <form id="signupForm" class="auth-form signup-form"
+      method="post" action="{% url 'login_billing' %}" novalidate hidden>
+            {% csrf_token %}
+
+           
+<!-- First Name and Last Name -->
+<div class="field-row">
+
+    <!-- First Name -->
+    <div class="field-group">
+        <label class="field" for="firstName">
+            <span class="field-icon" aria-hidden="true">♟</span>
+            <input
+                id="firstName"
+                name="first_name"
+                type="text"
+                placeholder="First Name"
+                autocomplete="given-name"
+                maxlength="50"
+                required>
+        </label>
+
+        <small
+            class="error-message"
+            id="firstNameError"
+            aria-live="polite"></small>
+    </div>
+
+    <!-- Last Name -->
+    <div class="field-group">
+        <label class="field" for="lastName">
+            <span class="field-icon" aria-hidden="true">♟</span>
+            <input
+                id="lastName"
+                name="last_name"
+                type="text"
+                placeholder="Last Name"
+                autocomplete="family-name"
+                maxlength="50"
+                required>
+        </label>
+
+        <small
+            class="error-message"
+            id="lastNameError"
+            aria-live="polite"></small>
+    </div>
+
+</div>
+
+
+            <!-- Separate error elements for each name -->
+<small class="error-message" id="firstNameError" aria-live="polite"></small>
+<small class="error-message" id="lastNameError" aria-live="polite"></small>
+
+            <!-- Username and Mobile -->
+            <div class="field-row">
+                <div class="field-group">
+                    <label class="field" for="signupUsername">
+                        <span class="field-icon" aria-hidden="true">@</span>
+                        <input id="signupUsername" name="username" type="text"
+                               placeholder="Username" autocomplete="username"
+                               minlength="3" maxlength="14"
+                               autocapitalize="off" spellcheck="false" required>
+                    </label>
+                    <small class="error-message" id="usernameError" aria-live="polite"></small>
+                </div>
+
+                <div class="field-group">
+                    <label class="field" for="mobile">
+                        <span class="field-icon" aria-hidden="true">☎</span>
+                        <input id="mobile" name="mobile" type="tel"
+                               inputmode="numeric" placeholder="Mobile Number"
+                               autocomplete="tel" maxlength="10" required>
+                    </label>
+                    <small class="error-message" id="mobileError" aria-live="polite"></small>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <label class="field">
+                <span class="field-icon" aria-hidden="true">✉</span>
+                <input id="email" name="email" type="email"
+                       placeholder="Email Address" autocomplete="email" required>
+            </label>
+            <small class="error-message" id="emailError" aria-live="polite"></small>
+
+            <!-- Password and Confirm Password -->
+            <div class="field-row">
+                <label class="field">
+                    <span class="field-icon" aria-hidden="true">▣</span>
+                    <input id="signupPassword" name="password" type="password"
+                           placeholder="Enter Password" autocomplete="new-password"
+                           minlength="8" maxlength="16" required>
+                    <button class="toggle-password" type="button"
+                            data-password-target="signupPassword"
+                            aria-label="Show password">◉</button>
+                </label>
+
+                <label class="field">
+                    <span class="field-icon" aria-hidden="true">▣</span>
+                    <input id="confirmPassword" name="confirm_password" type="password"
+                           placeholder="Confirm Password" autocomplete="new-password"
+                           minlength="8" maxlength="16" required>
+                    <button class="toggle-password" type="button"
+                            data-password-target="confirmPassword"
+                            aria-label="Show password">◉</button>
+                </label>
+            </div>
+
+            <small class="error-message" id="passwordError" aria-live="polite"></small>
+            <small class="error-message" id="confirmPasswordError" aria-live="polite"></small>
+
+            <!-- Staff / Admin dropdown -->
+            <div class="field role-field">
+                <span class="field-icon" aria-hidden="true">♙</span>
+
+                <div class="custom-role-dropdown" id="roleDropdown">
+                    <button type="button" class="role-dropdown-trigger"
+                            id="roleDropdownTrigger" aria-haspopup="listbox"
+                            aria-expanded="false">
+                        <span id="selectedRoleText">Staff</span>
+                        <span class="role-arrow" aria-hidden="true">⌄</span>
+                    </button>
+
+                    <div class="role-dropdown-menu" id="roleDropdownMenu"
+                         role="listbox" aria-label="Account type" hidden>
+                        <button type="button" class="role-option active"
+                                data-value="staff" role="option" aria-selected="true">
+                            Staff
+                        </button>
+                        <button type="button" class="role-option"
+                                data-value="admin" role="option" aria-selected="false">
+                            Admin (approval required)
+                        </button>
+                    </div>
+
+                    <input type="hidden" id="role" name="role" value="staff">
+                </div>
+            </div>
+
+            <button class="primary-button" type="submit">Sign Up</button>
+        </form>
+
+        <!-- Status message -->
+        <p class="form-status" id="formStatus"
+   role="status" aria-live="polite">{{ status_message|default:"" }}</p>
+
+    </section>
+</main>
+</body>
+</html>

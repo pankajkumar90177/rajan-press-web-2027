@@ -1,0 +1,808 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Page settings -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token }}">
+        <title>
+            Invoice Create | Rajan Printing Press
+        </title>
+        <!-- Dashboard CSS -->
+        <link rel="stylesheet" href="{% static 'css/Invoice_Create.css' %}">
+        <!-- Font Awesome icons -->
+        <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    </head>
+    <body>
+        <!-- ==================== HEADER ==================== -->
+        <header class="app-header">
+            <a class="brand" href="/">
+                <img src="{% static 'images/logo.png' %}" alt="Rajan Printing Press Logo">
+                <div class="brand-text">
+                    <h1>
+                        Rajan
+                        <span>
+                            Printing Press
+                        </span>
+                    </h1>
+                    <h2>
+                        &amp; Enterprises, Motihari, Bihar
+                    </h2>
+                </div>
+            </a>
+            <!-- Main navigation buttons -->
+            <nav class="header-actions">
+                <a class="nav-btn nav-pink" id="newInvoiceBtn" href="#">
+                    <i class="fa-solid fa-circle-plus">
+                    </i>
+                    New Invoice
+                </a>
+                <a target="_blank" rel="noopener noreferrer" class="nav-btn nav-green" href="https://rajanpress.com/">
+                    <i class="fa-solid fa-id-card">
+                    </i>
+                    ID Card
+                </a>
+                <a class="nav-btn nav-blue" href="#">
+                    <i class="fa-solid fa-box-open">
+                    </i>
+                    Product List
+                </a>
+               <a class="nav-btn nav-blue" href="{% url 'invoice_list_staff' %}">
+    <i class="fa-solid fa-file-invoice"></i>
+    Invoice List
+</a>
+<a class="nav-btn nav-yellow" href="{% url 'logout_billing' %}">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
+</a>
+            </nav>
+        </header>
+        <!-- ==================== MAIN DASHBOARD ==================== -->
+        <main class="main-layout">
+            <!-- LEFT PANEL: INVOICE FORM -->
+            <section class="left-panel">
+                <div class="left-scroll">
+                    <div class="section-banner">
+                        <i class="fa-solid fa-file-circle-plus">
+                        </i>
+                        <h2>
+                            Invoice Form
+                        </h2>
+                    </div>
+                    <!-- Customer and invoice details -->
+                    <div class="details-layout">
+                        <!-- CUSTOMER DETAILS -->
+                        <section class="form-card customer-card">
+                            <h3 class="card-heading heading-blue">
+                                <i class="fa-solid fa-user">
+                                </i>
+                                Customer Details
+                            </h3>
+                            <div class="form-fields">
+                                <label>
+                                    Customer Name
+                                    <input id="customerName" name="customer_name"
+       type="text"
+       value="Rajan Kumar"
+       placeholder="Enter customer name"
+       maxlength="100"
+       pattern="[A-Za-zÀ-ÿ]+(?:[ '-][A-Za-zÀ-ÿ]+)*"
+       title="केवल नाम के अक्षर, स्पेस, हाइफ़न या apostrophe लिखें"
+       autocomplete="name"
+       required>
+                                </label>
+                                <!-- Mobile number input; validation is in Invoice_Create.js -->
+                                <label>
+                                    Mobile No
+                                    <input type="text"
+           id="customerMobile"
+           name="customer_mobile"
+           placeholder="Enter mobile number"
+           inputmode="numeric"
+           maxlength="10"
+           autocomplete="off"
+           required>
+                                    <small id="mobileError" class="mobile-error" hidden>
+                                    </small>
+                                </label>
+                                <label class="span-two">
+                                    Address
+                                    <textarea id="customerAddress" name="customer_address"
+                                      placeholder="Enter address">
+                                        Ward No. 5, Motihari
+                                    </textarea>
+                                </label>
+                                <label>
+                                    City
+                                    <input id="customerCity" name="customer_city"
+                                   type="text" value="Motihari">
+                                </label>
+                                <label>
+                                    State
+                                    <select id="customerState" name="customer_state">
+                                        <option value="Bihar" selected>
+                                            Bihar
+                                        </option>
+                                        <option value="Uttar Pradesh">
+                                            Uttar Pradesh
+                                        </option>
+                                        <option value="Jharkhand">
+                                            Jharkhand
+                                        </option>
+                                        <option value="West Bengal">
+                                            West Bengal
+                                        </option>
+                                        <option value="Delhi">
+                                            Delhi
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>
+                                    PIN Code
+                                    <input id="customerPin" name="customer_pin"
+       type="text"
+       value="845401"
+       inputmode="numeric"
+       pattern="[0-9]{6}"
+       maxlength="6"
+       minlength="6"
+       title="PIN Code mein exactly 6 digits bharein"
+       autocomplete="postal-code"
+       required>
+                                </label>
+                            </div>
+                        </section>
+                        <!-- INVOICE DETAILS -->
+                        <section class="form-card invoice-card">
+                            <h3 class="card-heading heading-pink">
+                                <i class="fa-solid fa-file-invoice">
+                                </i>
+                                Invoice Details
+                            </h3>
+                            <div class="form-fields">
+                                <label>
+                                    Invoice No.
+                                    <input id="invoiceNumber" name="invoice_number"
+       type="text" value="{{ next_invoice_number }}">
+                                </label>
+                                <label>
+                                    Invoice Date
+                                    <input id="invoiceDate" name="invoice_date" type="date">
+                                </label>
+                                <label>
+                                    Payment Mode
+                                    <select id="paymentMode" name="payment_mode">
+                                        <option value="Cash">
+                                            Cash
+                                        </option>
+                                        <option value="Bank Transfer" selected>
+                                            Bank Transfer
+                                        </option>
+                                        <option value="UPI">
+                                            UPI
+                                        </option>
+                                        <option value="Cheque">
+                                            Cheque
+                                        </option>
+                                        <option value="Card">
+                                            Card
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>
+                                    GST Applicable
+                                    <select id="gstApplicable" name="gst_applicable">
+                                        <option value="yes" selected>
+                                            Yes
+                                        </option>
+                                        <option value="no">
+                                            No
+                                        </option>
+                                    </select>
+                                </label>
+                                <!-- Customer GSTIN visibility is managed by the external JS -->
+                                <label class="span-two" id="customerGstinField">
+                                    Customer GSTIN (Optional)
+                                    <input id="customerGstin" name="customer_gstin"
+           type="text"
+           value=""
+           placeholder="Enter customer GSTIN"
+           maxlength="15"
+           minlength="15"
+           pattern="[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][A-Z0-9]Z[A-Z0-9]"
+           title="GSTIN ठीक 15 अक्षर-अंकों का होना चाहिए"
+           autocomplete="off"
+           style="text-transform: uppercase;">
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- SHOP SETTINGS -->
+                    <section class="form-card shop-settings-card">
+                        <h3 class="card-heading heading-pink">
+                            <i class="fa-solid fa-shop">
+                            </i>
+                            Shop Details
+                        </h3>
+                        <div class="form-fields shop-settings-fields">
+                            <label>
+                                Shop Details Applicable
+                                <select id="shopDetailsApplicable" name="shop_details_applicable">
+                                    <option value="yes" selected>
+                                        Yes
+                                    </option>
+                                    <option value="no">
+                                        No
+                                    </option>
+                                </select>
+                            </label>
+                            <label>
+                                Shop Details GSTIN
+                                <select id="shopGstinApplicable" name="shop_gstin_applicable">
+                                    <option value="yes" selected>
+                                        Yes
+                                    </option>
+                                    <option value="no">
+                                        No
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </section>
+                    <!-- PRODUCT / SERVICE DETAILS -->
+                    <section class="product-card">
+                        <div class="product-heading">
+                            <h3>
+                                <i class="fa-solid fa-cart-shopping">
+                                </i>
+                                Product / Service Details
+                            </h3>
+                            <!-- HSN visibility is controlled by the external JS -->
+                            <label class="hsn-switch-control" for="hsnToggle">
+                                <input type="checkbox" id="hsnToggle" checked>
+                                <span class="hsn-switch-track">
+                                    <span class="hsn-switch-knob">
+                                    </span>
+                                </span>
+                                <span>
+                                    HSN Code
+                                </span>
+                            </label>
+                        </div>
+                        <div class="table-container">
+                            <table class="product-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:6%">
+                                            SN
+                                        </th>
+                                        <th style="width:23%">
+                                            Item / Description
+                                        </th>
+                                        <th class="hsn-column" style="width:12%">
+                                            HSN Code
+                                        </th>
+                                        <th style="width:8%">
+                                            Qty
+                                        </th>
+                                        <th style="width:12%">
+                                            Rate (₹)
+                                        </th>
+                                        <th style="width:14%">
+                                            Discount (₹)
+                                        </th>
+                                        <th style="width:15%">
+                                            Amount (₹)
+                                        </th>
+                                        <th style="width:10%">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productRows">
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" id="addItemBtn" class="add-item-btn">
+                            <i class="fa-solid fa-plus">
+                            </i>
+                            Add Item
+                        </button>
+                    </section>
+                    <!-- SUMMARY CARDS -->
+                    <div class="summary-layout">
+                        <!-- DISCOUNT & GST -->
+                        <section class="summary-card discount-card">
+                            <h3 class="summary-heading pink-heading">
+                                <i class="fa-solid fa-percent">
+                                </i>
+                                Discount &amp; GST
+                            </h3>
+                            <div class="summary-fields">
+                                <label>
+                                    Item Total
+                                    <input id="itemTotal" value="680.00" readonly>
+                                </label>
+                                <label>
+                                    Discount (₹)
+                                    <input id="discountInput" type="number" min="0" step="0.01" value="">
+                                </label>
+                                <label>
+                                    Sub Total
+                                    <input id="subTotal" value="650.00" readonly>
+                                </label>
+                                <label class="gst-rate-field">
+                                    GST Rate
+                                    <select id="gstRate">
+                                        <option value="0">
+                                            0%
+                                        </option>
+                                        <option value="5">
+                                            5%
+                                        </option>
+                                        <option value="12">
+                                            12%
+                                        </option>
+                                        <option value="18" selected>
+                                            18%
+                                        </option>
+                                        <option value="28">
+                                            28%
+                                        </option>
+                                    </select>
+                                </label>
+                                <label class="gst-line">
+                                    CGST (%)
+                                    <input id="cgstInput" value="58.50" readonly>
+                                </label>
+                                <label class="gst-line">
+                                    SGST (%)
+                                    <input id="sgstInput" value="58.50" readonly>
+                                </label>
+                            </div>
+                        </section>
+                        <!-- FINAL AMOUNT -->
+                        <section class="summary-card final-card">
+                            <h3 class="summary-heading blue-heading">
+                                <i class="fa-solid fa-calculator">
+                                </i>
+                                Final Amount
+                            </h3>
+                            <div class="final-fields">
+                                <p>
+                                    Item Total
+                                    <strong id="finalItemTotal">
+                                        ₹ 680.00
+                                    </strong>
+                                </p>
+                                <p>
+                                    Discount
+                                    <strong id="finalDiscount" class="red">
+                                        − ₹ 30.00
+                                    </strong>
+                                </p>
+                                <p>
+                                    Sub Total
+                                    <strong id="finalSubTotal">
+                                        ₹ 650.00
+                                    </strong>
+                                </p>
+                                <p class="gst-line">
+                                    <span id="finalCgstLabel">
+                                        CGST (9%)
+                                    </span>
+                                    <strong id="finalCgst">
+                                        ₹ 58.50
+                                    </strong>
+                                </p>
+                                <p class="gst-line">
+                                    <span id="finalSgstLabel">
+                                        SGST (9%)
+                                    </span>
+                                    <strong id="finalSgst">
+                                        ₹ 58.50
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="grand-total">
+                                <strong>
+                                    Grand Total
+                                </strong>
+                                <strong id="grandTotal">
+                                    ₹ 767.00
+                                </strong>
+                            </div>
+                        </section>
+                        <!-- PAYMENT DETAILS -->
+                        <section class="summary-card payment-card">
+                            <h3 class="summary-heading orange-heading">
+                                <i class="fa-solid fa-wallet">
+                                </i>
+                                Payment Details
+                            </h3>
+                            <div class="payment-content">
+                                <img id="paymentQrCode"
+     src="{% static 'images/Qrcode.png' %}"
+     alt="Payment QR Code">
+                                <div class="payment-methods">
+                                    <img src="{% static 'images/Bhim.png' %}" alt="BHIM">
+                                    <img src="{% static 'images/phonepay.png' %}" alt="PhonePe">
+                                    <img src="{% static 'images/googlepay.png' %}" alt="Google Pay">
+                                    <img src="{% static 'images/paytmpay.png' %}" alt="Paytm">
+                                </div>
+                            </div>
+                            <label class="utr-field">
+                                Ref No. Or UTR No.
+                                <input id="utrInput" type="text" placeholder="Enter Ref No. / UTR No.">
+                            </label>
+                        </section>
+                    </div>
+                    <!-- FORM BUTTONS -->
+                    <div class="form-buttons">
+                        <button type="reset" id="resetBtn" class="reset-btn">
+                            <i class="fa-solid fa-rotate-left">
+                            </i>
+                            Reset
+                        </button>
+                        <button type="button" id="printBtn" class="print-btn">
+                            <i class="fa-solid fa-print">
+                            </i>
+                            Print Invoice
+                        </button>
+                        <button type="button" id="pdfBtn" class="pdf-btn">
+                            <i class="fa-solid fa-file-pdf">
+                            </i>
+                            Download PDF
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- RIGHT PANEL: LIVE INVOICE PREVIEW -->
+            <section class="right-panel">
+                <div class="right-scroll">
+                    <article class="invoice-paper">
+                        <!-- Shop logo, branding, contact and QR -->
+                        <header class="paper-header">
+                            <img class="paper-logo"
+                         src="{% static 'images/logo.png' %}"
+                         alt="Rajan Logo">
+                            <div class="paper-brand">
+                                <h2>
+                                    Rajan
+                                </h2>
+                                <h3>
+                                    Printing Press &amp; Enterprises, Motihari, Bihar
+                                </h3>
+                                <p>
+                                    Print | Design | ID Card | Computer | Gift | Cyber Cafe | More...
+                                </p>
+                            </div>
+                            <div class="paper-contact">
+                                <p>
+                                    <i class="fa-solid fa-location-dot">
+                                    </i>
+                                    Ms College Road, Chandmari Chowk, Motihari, Bihar - 845401
+                                </p>
+                                <p>
+                                    <i class="fa-solid fa-phone">
+                                    </i>
+                                    8709766724, 8340434513
+                                </p>
+                                <p>
+                                    <i class="fa-solid fa-envelope">
+                                    </i>
+                                    rajanpress@gmail.com
+                                </p>
+                                <p>
+                                    <i class="fa-solid fa-globe">
+                                    </i>
+                                    www.rajanpress.com
+                                </p>
+                                <p>
+                                    <i class="fa-solid fa-globe">
+                                    </i>
+                                    www.rajanpress.in
+                                </p>
+                            </div>
+                            <img class="paper-header-qr"
+                         src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Frajanpress.com%2F"
+                         alt="Shop QR Code">
+                        </header>
+                        <!-- Invoice title and metadata -->
+                        <section class="paper-title">
+                            <h1>
+                                <i class="fa-solid fa-file-invoice">
+                                </i>
+                                INVOICE
+                            </h1>
+                            <div class="paper-meta">
+                                <div>
+                                    <span>
+                                        Invoice No.
+                                    </span>
+                                    <strong id="previewInvoiceNumber">
+                                        {{ next_invoice_number }}
+                                    </strong>
+                                </div>
+                                <div>
+                                    <span>
+                                        Invoice Date
+                                    </span>
+                                    <strong id="previewInvoiceDate">
+                                        06 Oct 2026
+                                    </strong>
+                                </div>
+                                <div>
+                                    <span>
+                                        Payment Mode
+                                    </span>
+                                    <strong id="previewPaymentMode">
+                                        Bank Transfer
+                                    </strong>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Customer and shop details -->
+                        <section class="paper-details">
+                            <!-- Customer details preview -->
+                            <div class="paper-detail-card bill-to">
+                                <h3>
+                                    <i class="fa-solid fa-address-card">
+                                    </i>
+                                    Bill To (Customer Details)
+                                </h3>
+                                <p>
+                                    <span>
+                                        Name
+                                    </span>
+                                    <b>
+                                        :
+                                    </b>
+                                    <strong id="previewCustomerName">
+                                        Rajan Kumar
+                                    </strong>
+                                </p>
+                                <p>
+                                    <span>
+                                        Mobile
+                                    </span>
+                                    <b>
+                                        :
+                                    </b>
+                                    <strong id="previewCustomerMobile">
+                                        9876543210
+                                    </strong>
+                                </p>
+                                <p>
+                                    <span>
+                                        Address
+                                    </span>
+                                    <b>
+                                        :
+                                    </b>
+                                    <strong id="previewCustomerAddress">
+                                        Ward No. 5, Motihari, Bihar - 845401
+                                    </strong>
+                                </p>
+                                <!-- Visibility is controlled by Invoice_Create.js -->
+                                <p id="previewCustomerGstinRow">
+                                    <span>
+                                        GSTIN
+                                    </span>
+                                    <b>
+                                        :
+                                    </b>
+                                    <strong id="previewCustomerGstin">
+                                        10ABCDE1234F1Z5
+                                    </strong>
+                                </p>
+                            </div>
+                            <!-- Shop preview -->
+                            <div class="paper-detail-card shop-details" id="previewShopDetails">
+                                <h3>
+                                    <i class="fa-solid fa-shop">
+                                    </i>
+                                    Shop Details
+                                </h3>
+                                <strong class="shop-name">
+                                    Rajan Printing Press &amp; Enterprises
+                                </strong>
+                                <p>
+                                    Ms College Road, Chandmari Chowk, Motihari, Bihar - 845401
+                                </p>
+                                <p>
+                                    Phone
+                                    <b>
+                                        :
+                                    </b>
+                                    8709766724, 8340434513
+                                </p>
+                                <p>
+                                    Email
+                                    <b>
+                                        :
+                                    </b>
+                                    rajanpress@gmail.com
+                                </p>
+                                <!-- Shop GSTIN visibility is controlled by Invoice_Create.js -->
+                                <p id="previewShopGstinRow">
+                                    <span>
+                                        GSTIN
+                                    </span>
+                                    <b>
+                                        :
+                                    </b>
+                                    <strong id="previewShopGstin">
+                                        10ABCDE1234F1Z5
+                                    </strong>
+                                </p>
+                            </div>
+                        </section>
+                        <!-- Preview product table -->
+                        <div class="paper-table-container">
+                            <table class="paper-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:8%">
+                                            SN
+                                        </th>
+                                        <th style="width:30%">
+                                            Description
+                                        </th>
+                                        <th class="preview-hsn-column" style="width:14%">
+                                            HSN Code
+                                        </th>
+                                        <th style="width:12%">
+                                            Qty
+                                        </th>
+                                        <th style="width:16%">
+                                            Rate (₹)
+                                        </th>
+                                        <th style="width:20%">
+                                            Amount (₹)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!-- Product rows are generated by Invoice_Create.js -->
+                                <tbody id="previewProductRows">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Terms and totals -->
+                        <section class="paper-summary">
+                            <div class="terms-card">
+                                <h3>
+                                    <i class="fa-solid fa-file-lines">
+                                    </i>
+                                    Terms &amp; Conditions
+                                </h3>
+                                <p>
+                                    1. Goods once sold will not be taken back.
+                                </p>
+                                <p>
+                                    2. We are not responsible for any errors after printing.
+                                </p>
+                                <p>
+                                    3. Payment must be made at the time of order or delivery.
+                                </p>
+                                <p>
+                                    4. For bulk orders, advance payment may be required.
+                                </p>
+                            </div>
+                            <div class="paper-total-list">
+                                <p>
+                                    <span>
+                                        Total Amount
+                                    </span>
+                                    <strong id="previewItemTotal">
+                                        ₹ 680.00
+                                    </strong>
+                                </p>
+                                <p>
+                                    <span>
+                                        Discount
+                                    </span>
+                                    <strong id="previewDiscount">
+                                        ₹ 30.00
+                                    </strong>
+                                </p>
+                                <p>
+                                    <span>
+                                        Sub Total
+                                    </span>
+                                    <strong id="previewSubTotal">
+                                        ₹ 650.00
+                                    </strong>
+                                </p>
+                                <p class="gst-preview-total">
+                                    <span id="previewCgstLabel">
+                                        CGST (9%)
+                                    </span>
+                                    <strong id="previewCgst">
+                                        ₹ 58.50
+                                    </strong>
+                                </p>
+                                <p class="gst-preview-total">
+                                    <span id="previewSgstLabel">
+                                        SGST (9%)
+                                    </span>
+                                    <strong id="previewSgst">
+                                        ₹ 58.50
+                                    </strong>
+                                </p>
+                                <p class="paper-grand">
+                                    <span>
+                                        Grand Total
+                                    </span>
+                                    <strong id="previewGrandTotal">
+                                        ₹ 767.00
+                                    </strong>
+                                </p>
+                            </div>
+                        </section>
+                        <!-- Payment QR, reference, amount words and signature -->
+                        <section class="paper-payment-footer">
+                            <div class="paper-qr">
+                                <img
+    id="invoicePreviewQr"
+    src="{% static 'images/Qrcode.png' %}"
+    alt="Invoice QR Code"
+>
+                            </div>
+                            <!-- This section is shown when a UTR/reference number is entered -->
+                            <div class="paper-payment-fields" id="previewUtrSection" hidden>
+                                <label>
+                                    <strong>
+                                        <i class="fa-solid fa-building-columns">
+                                        </i>
+                                        Ref No. Or UTR No.
+                                    </strong>
+                                    <span id="previewUtr">
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="amount-words">
+                                <strong>
+                                    <i class="fa-solid fa-indian-rupee-sign">
+                                    </i>
+                                    Total Amount (In Words)
+                                </strong>
+                                <span id="previewAmountWords">
+                                    Rupees Seven Hundred Sixty Seven Only
+                                </span>
+                            </div>
+                            <!-- Thanks for payment remains on the invoice preview -->
+                            <div class="signature-block">
+    <img
+        src="{% static 'images/Signature.png' %}"
+        alt="Authorized Signature"
+        class="signature-image"
+    >
+    <p>Authorized Signature</p>
+    <strong>Rajan Printing Press &amp; Enterprises</strong>
+    <p style="color: blueviolet; font-size: 10px;">Thanks for payment</p>
+</div>
+                        </section>
+                        <!-- Invoice footer -->
+                        <footer class="paper-footer">
+                            © 2026 Rajan Printing Press &amp; Enterprises. All Rights Reserved.
+                        </footer>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+   
+{% if edit_mode %}
+    {{ edit_invoice_data|json_script:"edit-invoice-data" }}
+
+    <script>
+        window.EDIT_INVOICE_TOKEN = "{{ edit_invoice_token|escapejs }}";
+    </script>
+{% endif %}
+
+<script src="{% static 'js/Invoice_Create.js' %}"></script>
+</body>
+</html>

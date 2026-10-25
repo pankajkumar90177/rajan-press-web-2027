@@ -1,0 +1,279 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Page ki basic settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Browser tab ka title -->
+    <title>Rajan Printing Press &amp; Enterprises</title>
+
+    <!-- Main CSS file connect karna -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- =============== HEADER START =============== -->
+    <header class="header">
+
+        <!-- Left side: Business logo aur naam -->
+        <div class="brand">
+            <img
+                src="{% static 'images/logo.png' %}"
+                alt="Rajan Printing Press Logo"
+            >
+
+            <div class="brand-text">
+                <h1>Rajan <span>Printing Press</span></h1>
+                <p>&amp; Enterprises, Motihari, Bihar</p>
+            </div>
+        </div>
+
+      
+<!-- Right side: Navigation menu -->
+<nav class="navigation">
+
+    <a href="#" class="nav-link active">
+        <span class="nav-icon">⌂</span>
+        Home
+    </a>
+
+    <a href="{% url 'login_billing' %}"
+       class="nav-link create-bill-btn"
+       target="_blank"
+       rel="noopener noreferrer">
+        <span class="nav-icon">▤</span>
+        Create Bill
+    </a>
+
+    <a href="https://rajanpress.com/" class="nav-link"  target="_blank">
+        <span class="nav-icon">▣</span>
+        ID Cards
+    </a>
+
+    <a href="#" class="nav-link login">
+        <span class="nav-icon">♙</span>
+        Login
+    </a>
+
+</nav>
+
+    </header>
+    <!-- =============== HEADER END =============== -->
+
+
+    <!-- =============== MAIN CONTENT START =============== -->
+    <main class="main-content">
+
+        <!--
+            Hero banner mein banner.png use ho raha hai.
+            Is image mein heading aur tagline pehle se hain.
+            Isliye yahan dobara HTML text nahi likhna hai.
+        -->
+        <section
+            class="hero"
+            aria-label="Rajan Printing Press banner"
+        >
+        </section>
+
+
+        <!-- =============== PRODUCT CARDS START =============== -->
+        <!-- 10 cards: 5 columns aur 2 rows -->
+
+        <section class="products">
+
+            <!-- Card 1: Visiting Card -->
+            <article class="product-card pink">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/visiting-card.png' %}"
+                        alt="Visiting Cards"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Visiting Card Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 2: Shadi Card -->
+            <article class="product-card yellow">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/shadi-card.png' %}"
+                        alt="Wedding Cards"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Shadi Card Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 3: PVC Card -->
+            <article class="product-card blue">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/pvc-card.png' %}"
+                        alt="PVC Cards"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>PVC Card Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 4: T-Shirt Printing -->
+            <article class="product-card pink">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/tshirt.png' %}"
+                        alt="T-Shirt Printing"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>T-Shirt Print Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 5: Cup Printing -->
+            <article class="product-card yellow">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/cup.png' %}"
+                        alt="Printed Cups"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Cup Print Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 6: Handbill -->
+            <article class="product-card blue">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/handbill.png' %}"
+                        alt="Handbills"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Handbill Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 7: BillBook -->
+            <article class="product-card pink">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/billbook.png' %}"
+                        alt="Bill Books"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>BillBook Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 8: Mobile Accessories -->
+            <article class="product-card yellow">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/mobile-accessories.png' %}"
+                        alt="Mobile Accessories"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Mobile Accessories</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 9: Stationery -->
+            <article class="product-card blue">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/stationery.png' %}"
+                        alt="Stationery Materials"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Stationary Material Order</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+
+            <!-- Card 10: Computer Accessories -->
+            <article class="product-card pink">
+                <div class="product-image">
+                    <img
+                        src="{% static 'images/computer-accessories.png' %}"
+                        alt="Computer Accessories"
+                    >
+                </div>
+
+                <div class="product-label">
+                    <span>Computer Accessories</span>
+                    <b>›</b>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- =============== PRODUCT CARDS END =============== -->
+
+    </main>
+    <!-- =============== MAIN CONTENT END =============== -->
+
+
+    <!-- =============== FOOTER START =============== -->
+    <footer class="footer">
+
+        <!-- Copyright information -->
+        <p>
+            © 2026 Rajan Printing Press All Rights Reserved.
+        </p>
+
+        <!-- Footer links -->
+        <div class="footer-links">
+            <a href="#">About</a>
+            <i>|</i>
+            <a href="#">Contact</a>
+            <i>|</i>
+            <a href="#">Help</a>
+            <i>|</i>
+            <a href="#">Privacy Policy</a>
+        </div>
+
+    </footer>
+    <!-- =============== FOOTER END =============== -->
+
+</body>
+</html>

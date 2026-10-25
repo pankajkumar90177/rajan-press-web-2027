@@ -1,0 +1,1894 @@
+/* ==========================================================
+RAJAN PRINTING PRESS - INVOICE CREATE DASHBOARD
+File: static/css/Invoice_Create.css
+Design: Blue header, pink title, left form and right preview
+
+========================================================== */
+
+/* ==================== 1. GLOBAL ==================== */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #063978;
+    --navy-dark: #00336f;
+    --blue: #064bff;
+    --pink: #ff006b;
+    --orange: #ff5b13;
+    --border: #d9e7f5;
+    --light-blue: #eaf4ff;
+    --light-pink: #fff0f3;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    color: #111;
+    background: #f5f8fc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ==================== 2. HEADER ==================== */
+.app-header {
+    width: 100%;
+    height: 98px;
+    min-height: 98px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 8px 20px;
+    color: #fff;
+    background: linear-gradient(105deg, #073a7d, #00316b);
+    border-bottom: 2px solid #1765b4;
+    overflow: hidden;
+}
+
+.brand {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand > img {
+    width: 73px;
+    height: 76px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.brand-text {
+    min-width: 0;
+}
+
+.brand-text h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(25px, 2.65vw, 39px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.05;
+    white-space: nowrap;
+}
+
+.brand-text h1 span {
+    color: #ffdc00;
+}
+
+.brand-text h2 {
+    margin: 5px 0 0;
+    color: #fff;
+    font-size: clamp(13px, 1.45vw, 22px);
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.header-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.nav-btn {
+    min-height: 54px;
+    padding: 0 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px #0002;
+}
+
+.nav-btn i {
+    font-size: 24px;
+}
+
+.nav-pink {
+    background: linear-gradient(110deg, #ff006e, #f40068);
+}
+
+.nav-green {
+    background: linear-gradient(110deg, #009f84, #00866e);
+}
+
+.nav-blue {
+    background: linear-gradient(110deg, #075cc5, #0645a1);
+}
+
+.nav-yellow {
+    color: #063b80;
+    background: #ffce00;
+    font-weight: 700;
+}
+
+/* ==================== 3. MAIN TWO-COLUMN LAYOUT ==================== */
+.main-layout {
+    width: 100%;
+    height: calc(100vh - 98px);
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 13px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.left-panel,
+.right-panel {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    background: #fff;
+    border: 1px solid #dce7f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #18375512;
+    overflow: hidden;
+}
+
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px 9px;
+}
+
+.left-scroll,
+.right-scroll {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #b6c8dc #f4f7fb;
+}
+
+.left-scroll {
+    flex: 1 1 auto;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.right-scroll {
+    flex: 1 1 auto;
+    background: #fff;
+}
+
+.left-scroll::-webkit-scrollbar,
+.right-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.left-scroll::-webkit-scrollbar-thumb,
+.right-scroll::-webkit-scrollbar-thumb {
+    background: #b6c8dc;
+    border-radius: 8px;
+}
+
+/* ==================== 4. MAIN FORM BANNER ==================== */
+.section-banner {
+    height: 45px;
+    min-height: 45px;
+    margin: 0 -8px 8px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    background: linear-gradient(100deg, #ff006e, #f40068);
+    border-radius: 6px;
+}
+
+.section-banner i {
+    font-size: 25px;
+}
+
+.section-banner h2 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+/* ==================== 5. FORM CARDS ==================== */
+.form-card {
+    min-width: 0;
+    background: #fff;
+    border: 1px solid #e0eaf5;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.card-heading {
+    min-height: 32px;
+    margin: 0;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.card-heading i {
+    font-size: 21px;
+}
+
+.heading-blue {
+    color: #003eff;
+    background: linear-gradient(90deg, #e0efff, #e8f4ff);
+}
+
+.heading-pink {
+    color: #ff006b;
+    background: linear-gradient(90deg, #ffe6ec, #fff0f2);
+}
+
+.heading-orange,
+.orange-heading {
+    color: #ff500c;
+    background: linear-gradient(90deg, #fff0dc, #fff8ec);
+}
+
+/* Customer and invoice details side-by-side */
+.details-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 8px;
+    align-items: stretch;
+    margin-bottom: 7px;
+}
+
+.customer-card {
+    background: linear-gradient(135deg, #f7fbff, #fff);
+}
+
+.invoice-card {
+    background: linear-gradient(135deg, #fff8f9, #fff);
+}
+
+.form-fields {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 13px;
+    padding: 7px 9px 10px;
+}
+
+.form-fields label {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #171717;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.form-fields label b {
+    color: #e51a2c;
+}
+
+.span-two {
+    grid-column: 1 / -1;
+}
+
+.form-fields input,
+.form-fields select,
+.form-fields textarea {
+    width: 100%;
+    min-width: 0;
+    height: 31px;
+    padding: 5px 9px;
+    color: #111;
+    background: #fff;
+    border: 1px solid #d6e4f2;
+    border-radius: 5px;
+    outline: none;
+    font-size: 13px;
+}
+
+.form-fields textarea {
+    height: 51px;
+    padding-top: 7px;
+    resize: vertical;
+}
+
+.form-fields input:focus,
+.form-fields select:focus,
+.form-fields textarea:focus {
+    border-color: #1684ff;
+    box-shadow: 0 0 0 2px #1684ff12;
+}
+
+/* ==================== 6. SHOP SETTINGS ==================== */
+.shop-settings-card {
+    margin-bottom: 7px;
+    border-color: #f4dce4;
+    background: linear-gradient(120deg, #fff8fa, #fff);
+}
+
+.shop-settings-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px 9px;
+}
+
+.shop-settings-fields label {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+}
+
+.shop-settings-fields select {
+    width: 100%;
+    height: 32px;
+    padding: 5px 9px;
+    border: 1px solid #d8e5f3;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 13px;
+}
+
+/* ==================== 7. PRODUCT SECTION ==================== */
+.product-card {
+    min-width: 0;
+    margin-bottom: 7px;
+    padding-bottom: 5px;
+    background: linear-gradient(135deg, #fffaf0, #fff);
+    border: 1px solid #e1eaf4;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.product-heading {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 3px 12px;
+    background: linear-gradient(90deg, #fff4df, #fffaf1);
+}
+
+.product-heading h3 {
+    margin: 0;
+    color: #ff5b13;
+    font-size: 18px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.product-heading h3 i {
+    margin-right: 8px;
+    font-size: 22px;
+}
+
+/* HSN toggle control */
+.hsn-switch-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #111;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hsn-switch-control input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.hsn-switch-track {
+    position: relative;
+    width: 57px;
+    height: 28px;
+    flex: 0 0 57px;
+    display: inline-block;
+    border-radius: 30px;
+    background: #a8b4c3;
+    transition: background .2s ease;
+}
+
+.hsn-switch-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px #0003;
+    transition: transform .2s ease;
+}
+
+.hsn-switch-control input:checked + .hsn-switch-track {
+    background: #073fff;
+}
+
+.hsn-switch-control input:checked + .hsn-switch-track .hsn-switch-knob {
+    transform: translateX(29px);
+}
+
+/* Product table */
+.table-container {
+    width: 100%;
+    padding: 0 8px;
+    overflow-x: auto;
+}
+
+.product-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #d8e7f7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.product-table th {
+    height: 33px;
+    padding: 5px 3px;
+    color: #fff;
+    background: linear-gradient(90deg, #073b7c, #06458e);
+    border-right: 1px solid #4381c0;
+    border-bottom: 1px solid #4381c0;
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.product-table td {
+    height: 29px;
+    padding: 0;
+    border-right: 1px solid #d6e5f5;
+    border-bottom: 1px solid #d6e5f5;
+    text-align: center;
+    overflow: hidden;
+}
+
+.product-table tbody tr:nth-child(even) {
+    background: #f2f8ff;
+}
+
+.product-table tbody tr:nth-child(odd) {
+    background: #fff;
+}
+
+.product-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.product-table th:last-child,
+.product-table td:last-child {
+    border-right: 0;
+}
+
+.product-table input {
+    width: 100%;
+    height: 28px;
+    padding: 3px 5px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    text-align: center;
+    font-size: 12px;
+    outline: none;
+}
+
+.product-table td:nth-child(2) input {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.product-table td:nth-child(7) {
+    background: #ededed;
+}
+
+.product-table .delete-btn {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #0d8513;
+    cursor: pointer;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.product-table .delete-btn svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.product-table .delete-btn:hover {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.product-table .delete-btn:focus-visible {
+    outline: 2px solid #e11d48;
+    outline-offset: 2px;
+}
+
+.add-item-btn {
+    height: 36px;
+    margin: 9px 8px 0;
+    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    background: linear-gradient(100deg, #ff006e, #fa0065);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.add-item-btn i {
+    font-size: 23px;
+}
+
+/* Hide HSN columns in both tables */
+.hsn-hidden {
+    display: none !important;
+}
+
+/* ==================== 8. BOTTOM SUMMARY CARDS ==================== */
+.summary-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) minmax(0, 1.04fr);
+    gap: 8px;
+    align-items: stretch;
+    margin-bottom: 8px;
+}
+
+.summary-card {
+    min-width: 0;
+    border: 1px solid #e0eaf5;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.discount-card {
+    background: linear-gradient(135deg, #fff1f3, #ffeaee);
+}
+
+.final-card {
+    background: linear-gradient(135deg, #eff7ff, #e3f1ff);
+}
+
+.payment-card {
+    background: linear-gradient(135deg, #fff8ed, #fffaf2);
+}
+
+.summary-heading {
+    min-height: 32px;
+    margin: 0;
+    padding: 5px 11px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.summary-heading i {
+    font-size: 21px;
+}
+
+.pink-heading {
+    color: #ff006b;
+    background: linear-gradient(90deg, #ffe6ec, #fff0f2);
+}
+
+.blue-heading {
+    color: #003eff;
+    background: linear-gradient(90deg, #e0efff, #e8f4ff);
+}
+
+.orange-heading {
+    color: #ff500c;
+    background: linear-gradient(90deg, #fff0dc, #fff8ec);
+}
+
+/* Discount & GST fields */
+.summary-fields {
+    display: grid;
+    gap: 5px;
+    padding: 7px 9px 8px;
+}
+
+.summary-fields label {
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+.summary-fields label input,
+.summary-fields label select {
+    width: 57%;
+    min-width: 0;
+    height: 29px;
+    padding: 4px 7px;
+    border: 1px solid #dce5ef;
+    border-radius: 5px;
+    background: #fff;
+    text-align: right;
+    font-size: 12px;
+}
+
+.summary-fields label select {
+    padding: 3px 5px;
+    text-align: left;
+    font-size: 11px;
+}
+
+.summary-fields input[readonly] {
+    background: #f0f0f0;
+}
+
+/* Final Amount */
+.final-fields {
+    padding: 5px 8px 2px;
+}
+
+.final-fields p {
+    min-height: 26px;
+    margin: 0;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    background: rgba(255,255,255,.82);
+    border-bottom: 1px solid #e7eff7;
+    font-size: 13px;
+}
+
+.final-fields strong {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.final-fields .red {
+    color: #ff1717;
+}
+
+.grand-total {
+    min-height: 48px;
+    margin: 3px 7px 7px;
+    padding: 5px 9px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    color: #050505;
+    background: linear-gradient(100deg, #ffdc00, #ffcb00);
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.grand-total strong:last-child {
+    font-size: 22px;
+    white-space: nowrap;
+}
+
+/* ==================== 9. PAYMENT DETAILS ==================== */
+.payment-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px 2px;
+}
+
+.payment-content > img {
+    display: block;
+    width: 100%;
+    max-height: 130px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.payment-methods {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+}
+
+.payment-methods img {
+    display: block;
+    width: 100%;
+    max-width: 100px;
+    height: 28px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.utr-field {
+    display: block;
+    margin: 3px 9px 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.utr-field input {
+    display: block;
+    width: 100%;
+    height: 29px;
+    margin-top: 4px;
+    padding: 5px 8px;
+    border: 1px solid #d8e5f3;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 12px;
+}
+
+/* ==================== 10. FORM ACTION BUTTONS ==================== */
+.form-buttons {
+    display: grid;
+    grid-template-columns: .8fr 1.7fr 1.7fr;
+    gap: 9px;
+}
+
+.form-buttons button {
+    min-width: 0;
+    height: 46px;
+    border: 0;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-buttons button i {
+    margin-right: 8px;
+    font-size: 21px;
+}
+
+.reset-btn {
+    background: linear-gradient(#96999e, #82858a);
+}
+
+.print-btn {
+    background: linear-gradient(110deg, #0866d8, #0753c5);
+}
+
+.pdf-btn {
+    background: linear-gradient(110deg, #ff006e, #f40068);
+}
+
+/* ==========================================================
+11. RIGHT SIDE INVOICE PREVIEW
+
+========================================================== */
+.invoice-paper {
+    width: 100%;
+    min-width: 0;
+    padding: 4px 2px 0;
+    color: #080808;
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+/* Shop identity header */
+.paper-header {
+    display: grid;
+    grid-template-columns: 75px minmax(0, 1fr) minmax(0, 1fr) 100px;
+    align-items: center;
+    gap: 7px;
+    min-height: 126px;
+    padding: 5px 6px 7px;
+    border-bottom: 1px solid #dce9f7;
+}
+
+.paper-logo {
+    width: 75px;
+    height: 85px;
+    object-fit: contain;
+}
+
+.paper-brand {
+    min-width: 0;
+}
+
+.paper-brand h2 {
+    margin: 0;
+    color: #083e83;
+    font-size: clamp(27px, 3vw, 50px);
+    font-weight: 800;
+    line-height: .95;
+}
+
+.paper-brand h3 {
+    margin: 7px 0 0;
+    color: #003c83;
+    font-size: 8px;
+    line-height: 1.2;
+}
+
+.paper-brand p {
+    margin: 4px 0 0;
+    color: #003c83;
+    font-size: 8px;
+    line-height: 1.25;
+}
+
+.paper-contact {
+    min-width: 0;
+    color: #003d96;
+    font-size: 11px;
+}
+
+.paper-contact p {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 3px 0;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.paper-contact i {
+    width: 14px;
+    min-width: 14px;
+    margin-top: 1px;
+    font-size: 12px;
+}
+
+.paper-header-qr {
+    width: 100%;
+    max-width: 100px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border: 2px solid #d7e7f7;
+    border-radius: 4px;
+}
+
+/* Invoice title and metadata */
+.paper-title {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.2fr);
+    min-height: 66px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.paper-title h1 {
+    min-width: 0;
+    margin: 0;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #fff;
+    background: linear-gradient(100deg, #073a7d, #003777);
+    font-size: clamp(22px, 2.35vw, 37px);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.paper-title h1 i {
+    font-size: 34px;
+}
+
+.paper-meta {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid #e0eaf7;
+}
+
+.paper-meta > div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 3px;
+    border-right: 2px solid #ff0070;
+    text-align: center;
+}
+
+.paper-meta > div:last-child {
+    border-right: 0;
+}
+
+.paper-meta span {
+    color: #003b91;
+    font-size: 12px;
+}
+
+.paper-meta strong {
+    color: #003b91;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* Customer and shop details cards */
+.paper-details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+    align-items: stretch;
+    margin-bottom: 4px;
+}
+
+.paper-detail-card {
+    min-width: 0;
+    min-height: 136px;
+    padding: 8px 10px;
+    border: 1px solid #dceafa;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bill-to {
+    background: linear-gradient(120deg, #e9f4ff, #f5faff);
+}
+
+.shop-details {
+    background: linear-gradient(120deg, #fff1f3, #fff7f7);
+}
+
+.paper-detail-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+    color: #003eff;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.paper-detail-card h3 i {
+    font-size: 23px;
+}
+
+.shop-details h3 {
+    color: #ff006b;
+}
+
+.shop-name {
+    display: block;
+    margin: 0 0 5px;
+    color: #111;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.paper-detail-card p {
+    margin: 4px 0;
+    color: #111;
+    font-size: 12px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.bill-to p {
+    display: grid;
+    grid-template-columns: 55px 8px minmax(0, 1fr);
+    gap: 4px;
+    align-items: start;
+}
+
+.bill-to p strong {
+    min-width: 0;
+    font-weight: 400;
+}
+
+.shop-details p b {
+    margin: 0 4px;
+    font-weight: 400;
+}
+
+.shop-details #previewShopGstinRow span {
+    margin-right: 5px;
+}
+
+/* Preview product table */
+.paper-table-container {
+    width: 100%;
+    margin-bottom: 9px;
+    overflow-x: auto;
+}
+
+.paper-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #d5e5f7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.paper-table th {
+    height: 32px;
+    padding: 5px 3px;
+    color: #fff;
+    background: linear-gradient(100deg, #073b7c, #063d81);
+    border-right: 1px solid #6e9dcb;
+    border-bottom: 1px solid #6e9dcb;
+    text-align: center;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.paper-table td {
+    height: 27px;
+    padding: 4px 5px;
+    border-right: 1px solid #d4e4f6;
+    border-bottom: 1px solid #d4e4f6;
+    text-align: center;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.paper-table td:nth-child(2) {
+    text-align: left;
+}
+
+.paper-table tbody tr:nth-child(even) {
+    background: #eaf4ff;
+}
+
+.paper-table tbody tr:nth-child(odd) {
+    background: #fff;
+}
+
+.paper-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.paper-table th:last-child,
+.paper-table td:last-child {
+    border-right: 0;
+}
+
+/* Terms and totals */
+.paper-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .9fr);
+    gap: 8px;
+    align-items: start;
+}
+
+.terms-card {
+    min-width: 0;
+    min-height: 136px;
+    padding: 9px 11px;
+    background: linear-gradient(120deg, #e8f4ff, #eff7ff);
+    border: 1px solid #e0ecf9;
+    border-radius: 6px;
+}
+
+.terms-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 7px;
+    color: #003eff;
+    font-size: 13px;
+}
+
+.terms-card h3 i {
+    font-size: 22px;
+}
+
+.terms-card p {
+    margin: 6px 0;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.paper-total-list {
+    min-width: 0;
+    border: 1px solid #dce9f7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.paper-total-list p {
+    min-height: 26px;
+    margin: 0;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    border-bottom: 1px solid #e0eaf5;
+    font-size: 12px;
+}
+
+.paper-total-list p strong {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.paper-total-list .paper-grand {
+    min-height: 37px;
+    padding: 4px 10px;
+    color: #fff;
+    background: linear-gradient(100deg, #ff006e, #f40068);
+    border-bottom: 0;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.paper-grand strong {
+    font-size: 20px;
+}
+
+/* Payment QR, UTR, words and signature */
+.paper-payment-footer {
+    display: grid;
+    grid-template-columns: minmax(90px, 130px) minmax(0, 1fr) minmax(110px, 145px);
+    grid-template-areas:
+    "qr utr signature"
+    "qr words signature";
+    align-items: center;
+    gap: 7px 10px;
+    min-height: 163px;
+    padding: 9px 2px;
+}
+
+.paper-qr {
+    grid-area: qr;
+}
+
+.paper-qr img {
+    display: block;
+    width: 100%;
+    max-width: 130px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.paper-payment-fields {
+    grid-area: utr;
+    min-width: 0;
+}
+
+.paper-payment-fields label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.paper-payment-fields label strong {
+    color: #ff006b;
+    font-size: 12px;
+}
+
+.paper-payment-fields label span {
+    min-height: 27px;
+    padding: 5px 2px;
+    color: #0060d8;
+    border-bottom: 2px solid #1490ff;
+    overflow-wrap: anywhere;
+}
+
+.amount-words {
+    grid-area: words;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.amount-words > strong {
+    color: #ff006b;
+    font-size: 12px;
+}
+
+.amount-words > span {
+    min-height: 27px;
+    padding: 5px 2px;
+    color: #003dff;
+    border-bottom: 2px solid #1490ff;
+    overflow-wrap: anywhere;
+}
+
+.signature-block {
+    grid-area: signature;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+    color: #003d91;
+}
+
+.signature-mark {
+    min-height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #080808;
+    font-family: cursive;
+    font-size: 34px;
+    font-style: italic;
+    transform: rotate(-7deg);
+}
+
+.signature-block p {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.25;
+}
+
+.signature-block strong {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+/* Invoice footer */
+.paper-footer {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    color: #fff;
+    background: linear-gradient(100deg, #063a7d, #003372);
+    border-bottom: 7px solid #ffdc00;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* ==================== 12. GST VISIBILITY ==================== */
+.gst-hidden {
+    display: none !important;
+}
+
+#previewCustomerGstinRow[hidden],
+#previewShopGstinRow[hidden] {
+    display: none !important;
+}
+
+/* Hide GST summary rows when GST is not applicable */
+.gst-line[hidden],
+.gst-preview-total[hidden] {
+    display: none !important;
+}
+
+/* ==================== 13. RESPONSIVE ==================== */
+@media (max-width: 1250px) {
+    .app-header {
+        gap: 8px;
+        padding: 7px 12px;
+    }
+
+.brand {
+    gap: 8px;
+}
+
+.brand > img {
+    width: 58px;
+    height: 64px;
+}
+
+.brand-text h1 {
+    font-size: 27px;
+}
+
+.brand-text h2 {
+    font-size: 15px;
+}
+
+.header-actions {
+    gap: 6px;
+}
+
+.nav-btn {
+    padding: 0 9px;
+    font-size: 12px;
+}
+
+.nav-btn i {
+    font-size: 19px;
+}
+
+.main-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px;
+}
+
+.summary-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.payment-card {
+    grid-column: 1 / -1;
+}
+
+.payment-content {
+    grid-template-columns: 100px minmax(0, 1fr);
+}
+
+.payment-content > img {
+    max-height: 100px;
+}
+
+.payment-methods {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.payment-methods img {
+    width: 75px;
+    height: 24px;
+}
+
+.paper-header {
+    grid-template-columns: 55px minmax(0, 1fr) minmax(0, 1fr) 70px;
+    gap: 5px;
+}
+
+.paper-logo {
+    width: 55px;
+    height: 65px;
+}
+
+.paper-header-qr {
+    max-width: 70px;
+}
+
+.paper-contact {
+    font-size: 10px;
+}
+
+.paper-payment-footer {
+    grid-template-columns: 90px minmax(0, 1fr) 110px;
+}
+
+.paper-qr img {
+    max-width: 90px;
+}
+
+}
+
+@media (max-width: 850px) {
+    html,
+    body {
+        height: auto;
+        min-height: 100%;
+    }
+
+body {
+    overflow: auto;
+}
+
+.app-header {
+    height: auto;
+    min-height: 90px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    min-height: 40px;
+}
+
+.main-layout {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible;
+}
+
+.left-panel,
+.right-panel {
+    height: auto;
+    overflow: visible;
+}
+
+.left-scroll,
+.right-scroll {
+    height: auto;
+    overflow: visible;
+}
+
+.details-layout {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+}
+
+@media (max-width: 520px) {
+    .brand-text h1 {
+        font-size: 23px;
+    }
+
+.brand-text h2 {
+    font-size: 13px;
+}
+
+.shop-settings-fields,
+.summary-layout,
+.paper-details,
+.paper-summary {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.payment-card {
+    grid-column: auto;
+}
+
+.paper-header {
+    grid-template-columns: 55px minmax(0, 1fr) 65px;
+}
+
+.paper-contact {
+    grid-column: 1 / -1;
+}
+
+.paper-title {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.paper-title h1 {
+    justify-content: flex-start;
+}
+
+.paper-payment-footer {
+    grid-template-columns: 75px minmax(0, 1fr);
+    grid-template-areas:
+    "qr utr"
+    "qr words"
+    "signature signature";
+}
+
+.paper-qr img {
+    max-width: 75px;
+}
+
+.form-buttons {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+}
+
+/* ==================== 14. PRINT ==================== */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 5mm;
+    }
+
+html,
+body {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.app-header,
+.left-panel {
+    display: none !important;
+}
+
+.main-layout {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+}
+
+.right-panel {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.right-scroll {
+    height: auto;
+    overflow: visible;
+}
+
+.invoice-paper {
+    width: 100%;
+    padding: 0;
+}
+
+.paper-header,
+.paper-title,
+.paper-details,
+.paper-table-container,
+.paper-summary,
+.paper-payment-footer,
+.paper-footer {
+    break-inside: avoid;
+}
+
+}
+
+/* Top-right invoice preview QR code */
+.paper-header-qr {
+    width: 100px !important;
+    height: 100px !important;
+    max-width: none !important;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+/* =========================================
+INVOICE PREVIEW BRAND TEXT COLORS
+
+========================================= */
+
+/* Rajan - large brand name */
+.paper-brand h2 {
+    color: #063978 !important;
+    font-size: 58px !important;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+/* Printing Press & Enterprises */
+.paper-brand h3 {
+    color: #14a607 !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-top: 8px;
+}
+
+/* Print | Design | ID Card... */
+.paper-brand p {
+    color: #b517b5 !important;
+    font-size: 9px !important;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 6px;
+}
+
+/* Mobile number validation styles */
+.mobile-error {
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+#customerMobile.mobile-invalid {
+    border: 1px solid #dc2626 !important;
+    background-color: #fff1f2;
+}
+
+#customerMobile.mobile-valid {
+    border: 1px solid #16a34a !important;
+}
+
+/* Customer Name and Mobile Number - Slightly Bigger */
+#customerName,
+#customerMobile {
+    font-size: 15px !important;
+    height: 38px;
+    padding: 8px 10px;
+}
+
+.form-fields label:has(#customerName),
+.form-fields label:has(#customerMobile) {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+/* =========================================
+A4 PRINT / PDF - EXISTING DESIGN PRESERVE
+
+\========================================= */
+@page {
+    size: A4 portrait;
+    margin: 8mm;
+}
+
+@media print {
+    html,
+    body {
+        width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+/* Hide only the billing form and navigation */
+.app-header,
+.left-panel,
+.form-buttons {
+    display: none !important;
+}
+
+/* Full printable width */
+.main-layout,
+.right-panel,
+.right-scroll {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* A4 content width: 194mm after 8mm margins */
+.invoice-paper {
+    display: block !important;
+    position: static !important;
+    box-sizing: border-box !important;
+    width: 194mm !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+    transform: none !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+/* Preserve current design and colors */
+.paper-header,
+.paper-title,
+.paper-detail-card,
+.paper-table-container,
+.paper-table,
+.paper-footer {
+    box-sizing: border-box !important;
+}
+
+/* Table stays within A4 width */
+.paper-table-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+}
+
+.paper-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+}
+
+.paper-table th,
+.paper-table td {
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+}
+
+.paper-table thead {
+    display: table-header-group !important;
+}
+
+.paper-table tfoot {
+    display: table-footer-group !important;
+}
+
+/* Do not hide any invoice section based on GST settings */
+.invoice-paper [hidden] {
+    display: none !important;
+}
+
+}
+
+/* MOBILE FIX: Product / Service Details table */
+@media screen and (max-width: 520px) {
+    .product-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+.product-card .table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-card .product-table {
+    width: 700px;
+    min-width: 700px;
+    max-width: none;
+    table-layout: fixed;
+}
+
+.product-card .product-table th {
+    padding: 7px 5px;
+    font-size: 12px;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+.product-card .product-table td {
+    overflow: hidden;
+}
+
+.product-card .product-table input {
+    width: 100%;
+    min-width: 0;
+    font-size: 13px;
+}
+
+}
+
+.delete-btn {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff0f0;
+    color: #e11d48;
+    border: 1px solid #fecdd3;
+    border-radius: 7px;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 0;
+    transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #e11d48;
+    color: #fff;
+    border-color: #e11d48;
+}
+
+/* सभी Number Fields से Increase / Decrease Arrows हटाएँ */
+input[type="number"],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    margin: 0 !important;
+}
+
+/* Signature Image - Correct Size */
+.signature-image {
+    display: block;
+    width: 120px !important;
+    height: 35px !important;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto 3px;
+}

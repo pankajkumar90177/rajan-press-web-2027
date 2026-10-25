@@ -1,0 +1,273 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajan Printing Press | Create Bill</title>
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="{% static 'css/Create_Bill_Page.css' %}">
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+
+        <!-- Logo and business name -->
+        <a href="/" class="brand">
+            <img
+                src="{% static 'images/logo.png' %}"
+                alt="Rajan Printing Press Logo"
+            >
+
+            <div class="brand-text">
+                <h1>Rajan <span>Printing Press</span></h1>
+                <p>&amp; Enterprises, Motihari, Bihar</p>
+            </div>
+        </a>
+
+        <!-- Navigation menu -->
+        <nav class="navigation">
+
+            <a href="/" class="nav-link active">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 10.5 12 3l9 7.5v10h-6v-6H9v6H3z"/>
+                </svg>
+                <span>Home</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 3h9l4 4v14H6z"/>
+                    <path
+                        d="M14 3v5h5M9 12h7M9 16h7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    />
+                </svg>
+                <span>ID Cards</span>
+            </a>
+
+            <a href="#" class="nav-link login">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="5" y="10" width="14" height="11" rx="2"/>
+                    <path
+                        d="M8 10V7a4 4 0 0 1 8 0v3"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    />
+                    <circle cx="12" cy="15" r="1"/>
+                </svg>
+                <span>Login</span>
+            </a>
+
+        </nav>
+    </header>
+
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content">
+
+        <!-- Billing banner image -->
+        <section
+            class="hero"
+            aria-label="Rajan Printing Press Billing Management"
+        >
+        </section>
+
+
+        <!-- ========== BILL ACTION CARDS ========== -->
+        <section class="bill-actions">
+
+            <!-- Create Bill card -->
+            <article class="action-card create-card">
+
+                <div class="action-icon pink-icon">
+                    <svg viewBox="0 0 100 100" aria-hidden="true">
+                        <path d="M28 13h31l17 17v40H28z"/>
+                        <path d="M59 13v18h17" class="icon-cutout"/>
+                        <path
+                            d="M38 39h25M38 49h25M38 59h15"
+                            class="icon-line"
+                        />
+                        <circle cx="69" cy="72" r="17" class="icon-circle"/>
+                        <path d="M69 63v18M60 72h18" class="icon-plus"/>
+                    </svg>
+                </div>
+
+                <div class="action-content">
+                    <h2>Create Bill</h2>
+                    <p>
+                        Quickly create new bills for your<br class="desktop-break">
+                        products and services.
+                    </p>
+
+                    <a href="#" class="action-button pink-button">
+                        <span>Create New Bill</span>
+                        <span class="button-arrow">›</span>
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- View Bills card -->
+            <article class="action-card view-card">
+
+                <div class="action-icon yellow-icon">
+                    <svg viewBox="0 0 100 100" aria-hidden="true">
+                        <path d="M28 13h31l17 17v40H28z"/>
+                        <path d="M59 13v18h17" class="icon-cutout"/>
+                        <path
+                            d="M38 39h25M38 49h25M38 59h15"
+                            class="icon-line"
+                        />
+                        <circle cx="68" cy="67" r="15" class="icon-search"/>
+                        <path
+                            d="m79 78 10 10"
+                            class="icon-search-line"
+                        />
+                    </svg>
+                </div>
+
+                <div class="action-content">
+                    <h2>View Bills</h2>
+                    <p>
+                        Search and manage all your<br class="desktop-break">
+                        previous billing records.
+                    </p>
+
+                    <a href="#" class="action-button yellow-button">
+                        <span>View All Bills</span>
+                        <span class="button-arrow">›</span>
+                    </a>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ========== QUICK LINKS ========== -->
+        <section class="quick-links">
+
+            <!-- Customers -->
+            <a href="#" class="quick-item">
+                <div class="quick-icon customers-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <circle cx="32" cy="17" r="8"/>
+                        <circle cx="14" cy="23" r="6"/>
+                        <circle cx="50" cy="23" r="6"/>
+                        <path d="M17 49v-7c0-9 6-15 15-15s15 6 15 15v7z"/>
+                        <path d="M4 47v-5c0-6 4-10 10-10 3 0 5 1 7 3"/>
+                        <path d="M60 47v-5c0-6-4-10-10-10-3 0-5 1-7 3"/>
+                    </svg>
+                </div>
+
+                <div class="quick-text">
+                    <h3>Customers</h3>
+                    <p>Manage customer details</p>
+                </div>
+            </a>
+
+
+            <!-- Products -->
+            <a href="#" class="quick-item">
+                <div class="quick-icon products-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <path d="m32 6 24 12v28L32 58 8 46V18z"/>
+                        <path d="m8 18 24 13 24-13M32 31v27"/>
+                        <path
+                            d="m20 12 24 12-12 7-24-13z"
+                            class="box-highlight"
+                        />
+                    </svg>
+                </div>
+
+                <div class="quick-text">
+                    <h3>Products</h3>
+                    <p>Manage product items</p>
+                </div>
+            </a>
+
+
+            <!-- Services -->
+            <a href="#" class="quick-item">
+                <div class="quick-icon services-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <path d="M12 22h40l-4 35H16z"/>
+                        <path d="M23 23v-8a9 9 0 0 1 18 0v8"/>
+                    </svg>
+                </div>
+
+                <div class="quick-text">
+                    <h3>Services</h3>
+                    <p>Manage services</p>
+                </div>
+            </a>
+
+
+            <!-- Reports -->
+            <a href="#" class="quick-item">
+                <div class="quick-icon reports-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <rect x="8" y="34" width="12" height="23" rx="2"/>
+                        <rect x="26" y="22" width="12" height="35" rx="2"/>
+                        <rect x="44" y="8" width="12" height="49" rx="2"/>
+                    </svg>
+                </div>
+
+                <div class="quick-text">
+                    <h3>Reports</h3>
+                    <p>View sales and records</p>
+                </div>
+            </a>
+
+
+            <!-- Settings -->
+            <a href="#" class="quick-item">
+                <div class="quick-icon settings-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <path d="M26 5h12l2 7 6 3 7-3 6 10-5 5v8l5 5-6 10-7-3-6 3-2 7H26l-2-7-6-3-7 3-6-10 5-5v-8l-5-5 6-10 7 3 6-3z"/>
+                        <circle cx="32" cy="31" r="10" class="gear-hole"/>
+                    </svg>
+                </div>
+
+                <div class="quick-text">
+                    <h3>Settings</h3>
+                    <p>System configuration</p>
+                </div>
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+
+        <p>
+            © 2026 <strong>Rajan Printing Press.</strong> All Rights Reserved.
+        </p>
+
+        <div class="footer-links">
+            <a href="#">About</a>
+            <i>|</i>
+            <a href="#">Contact</a>
+            <i>|</i>
+            <a href="#">Help</a>
+            <i>|</i>
+            <a href="#">Privacy Policy</a>
+        </div>
+
+    </footer>
+
+</body>
+</html>

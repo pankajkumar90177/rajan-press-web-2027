@@ -1,0 +1,411 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice List | Rajan Printing Press</title>
+    <link rel="stylesheet" href="{% static 'css/invoice_list_staff.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a class="brand" href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Rajan Printing Press">
+        <span>
+            <strong>Rajan <em>Printing Press &amp; Enterprises</em></strong>
+            <small>Motihari, Bihar</small>
+        </span>
+    </a>
+
+    <div class="web-links">
+        <i class="fa-solid fa-globe"></i>
+        <span>www.rajanpress.com<br>www.rajanpress.in</span>
+    </div>
+
+    <nav class="top-actions">
+        <a class="nav-button pink" href="{% url 'invoice_create' %}">
+            <i class="fa-solid fa-file-circle-plus"></i> New Invoice
+        </a>
+        <a class="nav-button yellow" href="#">
+            <i class="fa-solid fa-id-card"></i> ID Card
+        </a>
+        <a class="nav-button outline" href="#">
+            <i class="fa-solid fa-box"></i> Product List
+        </a>
+        <a class="nav-button active" href="{% url 'invoice_list_staff' %}">
+            <i class="fa-solid fa-file-invoice"></i> Invoice List
+        </a>
+        <a class="nav-button outline" href="{% url 'logout_billing' %}">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </nav>
+</header>
+
+<main class="page">
+    <section class="hero">
+        <div class="hero-title">
+            <i class="fa-solid fa-file-invoice hero-icon"></i>
+            <div>
+                <h1>Invoice List</h1>
+                <p>View, Search and Manage All Invoices</p>
+            </div>
+        </div>
+        <div class="date-card">
+            <i class="fa-regular fa-calendar-days"></i>
+            <div>
+                <strong id="todayDate">—</strong>
+                <small id="todayTime">—</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <article class="stat-card blue">
+            <span class="stat-icon"><i class="fa-solid fa-file-lines"></i></span>
+            <div><p>Total Invoices</p>
+                <strong>{{ total_invoices|default:0 }}</strong>
+                <small>All Generated Invoices</small>
+            </div>
+        </article>
+
+        <article class="stat-card green">
+            <span class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+            <div><p>Total Amount</p>
+                <strong>₹ {{ total_amount|default:"0.00" }}</strong>
+                <small>Total Invoice Value</small>
+            </div>
+        </article>
+
+        <article class="stat-card pink-card">
+            <span class="stat-icon"><i class="fa-solid fa-check"></i></span>
+            <div><p>Paid Amount</p>
+                <strong>₹ {{ paid_amount|default:"0.00" }}</strong>
+                <small>Received Amount</small>
+            </div>
+        </article>
+
+        <article class="stat-card yellow-card">
+            <span class="stat-icon"><i class="fa-regular fa-clock"></i></span>
+            <div><p>Pending Amount</p>
+                <strong>₹ {{ pending_amount|default:"0.00" }}</strong>
+                <small>Pending Payment</small>
+            </div>
+        </article>
+
+        <article class="stat-card purple">
+            <span class="stat-icon"><i class="fa-solid fa-xmark"></i></span>
+            <div><p>Overdue Invoices</p>
+                <strong>{{ overdue_invoices|default:0 }}</strong>
+                <small>Pending for Long Time</small>
+            </div>
+        </article>
+    </section>
+
+    <form class="filter-panel" method="get" action="{% url 'invoice_list_staff' %}">
+        <div class="filter-heading">
+            <i class="fa-solid fa-filter"></i>
+            <strong>Search &amp; Filter</strong>
+            <small>Find Invoice Quickly</small>
+        </div>
+
+        <label>Search Invoice No.
+            <input type="text" name="invoice_no"
+                   value="{{ invoice_no_filter|default:'' }}"
+                   placeholder="Enter Invoice No.">
+        </label>
+
+        <label>Customer Name
+            <input type="text" name="customer"
+                   value="{{ customer_filter|default:'' }}"
+                   placeholder="Enter Customer Name">
+        </label>
+
+        <label>Mobile Number
+            <input type="text" name="mobile"
+                   value="{{ mobile_filter|default:'' }}"
+                   placeholder="Enter Mobile Number">
+        </label>
+
+        <label>From Date
+            <input type="date" name="from_date"
+                   value="{{ from_date_filter|default:'' }}">
+        </label>
+
+        <label>To Date
+            <input type="date" name="to_date"
+                   value="{{ to_date_filter|default:'' }}">
+        </label>
+
+        <label>Payment Status
+            <select name="status">
+                <option value="" {% if not status_filter %}selected{% endif %}>All Status</option>
+                <option value="paid" {% if status_filter == "paid" %}selected{% endif %}>Paid</option>
+                <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+                <option value="partial" {% if status_filter == "partial" %}selected{% endif %}>Partial</option>
+                <option value="overdue" {% if status_filter == "overdue" %}selected{% endif %}>Overdue</option>
+                <option value="failed" {% if status_filter == "failed" %}selected{% endif %}>Failed</option>
+                <option value="refunded" {% if status_filter == "refunded" %}selected{% endif %}>Refunded</option>
+            </select>
+        </label>
+
+        <div class="filter-buttons">
+            <button class="btn-search" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
+            <a class="btn-reset" href="{% url 'invoice_list_staff' %}">
+                <i class="fa-solid fa-rotate"></i> Reset
+            </a>
+        </div>
+
+        <input type="hidden" name="per_page" value="{{ per_page|default:10 }}">
+    </form>
+
+    <section class="table-panel">
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Invoice No.</th>
+                        <th>Invoice Date</th>
+                        <th>Customer Name</th>
+                        <th>Mobile No.</th>
+                        <th>Total Amount (₹)</th>
+                        <th>Payment Status</th>
+                        <th>Created By</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices %}
+                    <tr>
+                        <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                        <td>{{ invoice.invoice_no|default:"—" }}</td>
+                        <td>{{ invoice.invoice_date|date:"d M Y"|default:"—" }}</td>
+                        <td>{{ invoice.customer.customer_name|default:"—" }}</td>
+                        <td>{{ invoice.customer.mobile_no|default:"—" }}</td>
+                        <td class="amount">{{ invoice.grand_total|default:"0.00" }}</td>
+                        <td>
+                            <span class="status {{ invoice.payment_status|default:'pending'|lower }}">
+                                {{ invoice.payment_status|default:"Pending" }}
+                            </span>
+                        </td>
+                        <td>—</td>
+                        <td class="actions">
+                            
+
+<button class="action view" type="button"
+    data-url="{% url 'invoice_preview_fragment' invoice.invoice_id %}"
+    onclick="openInvoicePreview(this, 'view')">
+    <i class="fa-solid fa-eye"></i> View
+</button>
+
+<button class="action print" type="button"
+    data-url="{% url 'invoice_preview_fragment' invoice.invoice_id %}"
+    onclick="openInvoicePreview(this, 'print')">
+    <i class="fa-solid fa-print"></i> Print
+</button>
+
+<button class="action pdf" type="button"
+    data-url="{% url 'invoice_preview_fragment' invoice.invoice_id %}"
+    onclick="openInvoicePreview(this, 'pdf')">
+    <i class="fa-regular fa-file-pdf"></i> PDF
+</button>
+
+
+<form method="get"
+      action="{% url 'invoice_edit' invoice.invoice_id %}"
+      style="display:inline">
+    <button class="action edit" type="submit">
+        <i class="fa-solid fa-pen-to-square"></i> Edit
+    </button>
+</form>
+
+<form method="post"
+      action="{% url 'invoice_delete' invoice.invoice_id %}"
+      style="display:inline"
+      onsubmit="return confirm('Kya aap is invoice ko delete karna chahte hain?');">
+    {% csrf_token %}
+    <button class="action delete" type="submit">
+        <i class="fa-solid fa-trash"></i> Delete
+    </button>
+</form>
+
+
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="9" class="empty">No invoices found. Change your filters or create an invoice.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <form class="showing" method="get" action="{% url 'invoice_list_staff' %}">
+                {% for key, value in request.GET.items %}
+                    {% if key != "page" and key != "per_page" %}
+                        <input type="hidden" name="{{ key }}" value="{{ value }}">
+                    {% endif %}
+                {% endfor %}
+                <select name="per_page" aria-label="Rows per page" onchange="this.form.submit()">
+                    <option value="10" {% if per_page == 10 %}selected{% endif %}>10</option>
+                    <option value="20" {% if per_page == 20 %}selected{% endif %}>20</option>
+                    <option value="50" {% if per_page == 50 %}selected{% endif %}>50</option>
+                </select>
+                <span>
+                    {% if page_obj %}
+                        Showing {{ page_obj.start_index }}–{{ page_obj.end_index }}
+                        of {{ paginator.count }} invoices
+                    {% else %}
+                        Showing {{ invoices|length }} invoice(s)
+                    {% endif %}
+                </span>
+            </form>
+
+            <nav class="pagination" aria-label="Invoice pages">
+                {% if page_obj.has_previous %}
+                    <a href="?{{ query_string }}&page={{ page_obj.previous_page_number }}">&lsaquo;</a>
+                {% else %}
+                    <span class="disabled">&lsaquo;</span>
+                {% endif %}
+
+                {% for number in paginator.page_range %}
+                    {% if number == page_obj.number %}
+                        <span class="current">{{ number }}</span>
+                    {% else %}
+                        <a href="?{{ query_string }}&page={{ number }}">{{ number }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?{{ query_string }}&page={{ page_obj.next_page_number }}">&rsaquo;</a>
+                {% else %}
+                    <span class="disabled">&rsaquo;</span>
+                {% endif %}
+            </nav>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <span>© 2026 Rajan Printing Press &amp; Enterprises. All Rights Reserved.</span>
+    <div>
+        <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+        <a href="#"><i class="fa-solid fa-phone"></i> Contact</a>
+        <a href="#"><i class="fa-solid fa-comments"></i> Chat Bot</a>
+        <a href="#"><i class="fa-solid fa-file-lines"></i> Policy</a>
+    </div>
+</footer>
+
+
+<div id="invoiceModal" class="invoice-preview-modal" aria-hidden="true">
+    <div class="invoice-preview-dialog" role="dialog" aria-modal="true">
+
+        <div class="invoice-preview-toolbar">
+            <strong>Invoice Preview</strong>
+
+            <div>
+                <button type="button" onclick="printPreview()">
+                    <i class="fa-solid fa-print"></i> Print
+                </button>
+
+                <button type="button" onclick="printPreview()">
+                    <i class="fa-regular fa-file-pdf"></i> Save PDF
+                </button>
+
+                <button type="button" onclick="closeInvoice()">
+                    Close ×
+                </button>
+            </div>
+        </div>
+
+        <div id="invoicePreviewContent" class="invoice-preview-content">
+            <p>Invoice load hone ka intezar karein...</p>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+
+async function openInvoicePreview(button, action = "view") {
+    const modal = document.getElementById("invoiceModal");
+    const content = document.getElementById("invoicePreviewContent");
+    const url = button.getAttribute("data-url");
+
+    if (!modal || !content) {
+        alert("invoiceModal ya invoicePreviewContent HTML nahi mila.");
+        return;
+    }
+
+    if (!url) {
+        alert("Button mein data-url nahi hai.");
+        return;
+    }
+
+    modal.style.display = "flex";
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    content.innerHTML = "<p>Loading invoice...</p>";
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            credentials: "same-origin"
+        });
+
+        if (!response.ok) {
+            throw new Error("Invoice load failed: HTTP " + response.status);
+        }
+
+        const html = await response.text();
+
+       if (!html.includes("rp-paper")) {
+    throw new Error("Invoice preview ka design HTML mein nahi mila.");
+}
+
+content.innerHTML = html;
+
+        content.innerHTML = html;
+
+        if (action === "print" || action === "pdf") {
+            setTimeout(() => window.print(), 500);
+        }
+    } catch (error) {
+        content.innerHTML = "";
+        const message = document.createElement("p");
+        message.textContent = error.message;
+        content.appendChild(message);
+    }
+}
+
+function closeInvoice() {
+    const modal = document.getElementById("invoiceModal");
+    if (!modal) return;
+
+    modal.classList.remove("open");
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+}
+
+function printPreview() {
+    const content = document.getElementById("invoicePreviewContent");
+
+    if (!content || !content.querySelector(".rp-paper")) {
+        alert("Pehle invoice preview load hone dijiye.");
+        return;
+    }
+
+    window.print();
+}
+
+
+</script>
+</body>
+</html>

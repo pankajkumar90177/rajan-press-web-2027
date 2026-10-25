@@ -1,0 +1,1356 @@
+
+/* =========================================================
+   RAJAN PRINTING PRESS — INVOICE LIST
+   Clean CSS | No Body Scroll | Table-Only Scroll
+========================================================= */
+
+/* 1. THEME */
+:root {
+    --navy: #082957;
+    --navy-dark: #05224b;
+    --pink: #f50070;
+    --yellow: #ffc400;
+    --blue: #087ce7;
+    --text: #102d59;
+    --muted: #607596;
+    --border: #dce7f5;
+    --page: #f3f7fd;
+    --white: #ffffff;
+}
+
+/* 2. RESET */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    position: fixed;
+    inset: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--page);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 3. HEADER */
+.topbar {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    height: 88px;
+    min-height: 88px;
+    padding: 10px 22px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    color: var(--white);
+    background: linear-gradient(110deg, #06234c, #0c3268);
+}
+
+.brand {
+    flex: 0 1 530px;
+    min-width: 390px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.brand img {
+    flex: 0 0 75px;
+    width: 75px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.brand strong {
+    display: block;
+    font-size: 21px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.brand em {
+    color: #ffca05;
+    font-style: normal;
+}
+
+.brand small {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.web-links {
+    flex: 0 0 205px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: auto;
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: nowrap;
+}
+
+.web-links i {
+    font-size: 27px;
+}
+
+.top-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.nav-button {
+    min-height: 44px;
+    padding: 0 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: var(--white);
+    background: transparent;
+    border: 1px solid #7792b7;
+    border-radius: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.nav-button:hover {
+    background: #ffffff18;
+}
+
+.nav-button.pink {
+    background: var(--pink);
+    border-color: var(--pink);
+}
+
+.nav-button.yellow {
+    color: #101e31;
+    background: var(--yellow);
+    border-color: var(--yellow);
+}
+
+.nav-button.active {
+    border: 2px solid var(--pink);
+}
+
+/* 4. FIXED VIEWPORT LAYOUT */
+.page {
+    width: 100%;
+    height: calc(100vh - 88px);
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: 13px 19px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    overflow: hidden;
+}
+
+/* 5. INVOICE BANNER */
+.hero {
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 98px;
+    margin: 0;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    overflow: hidden;
+    color: var(--white);
+    border-radius: 12px;
+    background: linear-gradient(
+        100deg,
+        #ec0075 0%,
+        #f51b8b 35%,
+        #ff4ca0 44%,
+        #ffe47c 60%,
+        #0b315f 100%
+    );
+}
+
+.hero-title {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.hero-icon {
+    flex: 0 0 auto;
+    font-size: 42px;
+}
+
+.hero h1 {
+    margin: 0 0 5px;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 700;
+}
+
+.hero p {
+    margin: 0;
+    font-size: 15px;
+}
+
+.date-card {
+    flex: 0 0 245px;
+    min-width: 245px;
+    min-height: 68px;
+    padding: 12px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: var(--navy);
+    background: var(--white);
+    border-radius: 10px;
+}
+
+.date-card i {
+    font-size: 22px;
+}
+
+.date-card strong,
+.date-card small {
+    display: block;
+}
+
+.date-card small {
+    margin-top: 7px;
+    color: var(--muted);
+}
+
+/* 6. STATISTICS */
+.stats {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0;
+}
+
+.stat-card {
+    min-width: 0;
+    min-height: 106px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.stat-card p {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.stat-card strong {
+    display: block;
+    color: #101e34;
+    font-size: 24px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.stat-card small {
+    display: block;
+    margin-top: 7px;
+    color: #526b90;
+    font-size: 11px;
+}
+
+.stat-icon {
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 25px;
+}
+
+.blue {
+    background: #eff7ff;
+    border-color: #cfe5ff;
+}
+
+.blue .stat-icon {
+    color: #0871d5;
+    background: #c9e5ff;
+}
+
+.green {
+    background: #edfff5;
+    border-color: #c6f6dc;
+}
+
+.green .stat-icon {
+    color: #08794a;
+    background: #a0f3c6;
+}
+
+.pink-card {
+    background: #fff0f6;
+    border-color: #ffd0e3;
+}
+
+.pink-card .stat-icon {
+    color: var(--white);
+    background: var(--pink);
+}
+
+.yellow-card {
+    background: #fff9e9;
+    border-color: #ffe6a1;
+}
+
+.yellow-card .stat-icon {
+    color: #875500;
+    background: #ffdf72;
+}
+
+.purple {
+    background: #fff3ff;
+    border-color: #f0d2fa;
+}
+
+.purple .stat-icon {
+    color: #7a168c;
+    background: #edc1fa;
+}
+
+/* 7. SEARCH AND FILTER */
+.filter-panel {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 13px;
+    display: grid;
+    grid-template-columns:
+        193px
+        repeat(3, minmax(130px, 1fr))
+        repeat(2, minmax(125px, 0.8fr))
+        minmax(140px, 0.9fr)
+        195px;
+    gap: 10px;
+    align-items: end;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+}
+
+.filter-heading {
+    min-width: 0;
+    min-height: 70px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--white);
+    background: var(--pink);
+    border-radius: 9px;
+    text-align: center;
+}
+
+.filter-heading i {
+    font-size: 22px;
+}
+
+.filter-heading strong {
+    font-size: 14px;
+}
+
+.filter-heading small {
+    font-size: 11px;
+}
+
+.filter-panel label {
+    display: block;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.filter-panel input,
+.filter-panel select {
+    display: block;
+    width: 100%;
+    height: 38px;
+    margin-top: 7px;
+    padding: 0 10px;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid #d4e0f0;
+    border-radius: 7px;
+    outline: none;
+}
+
+.filter-panel input:focus,
+.filter-panel select:focus {
+    border-color: #1680e8;
+    box-shadow: 0 0 0 2px #1680e81a;
+}
+
+.filter-buttons {
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 7px;
+}
+
+.btn-search,
+.btn-reset {
+    min-width: 0;
+    min-height: 38px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--white);
+    border: 0;
+    border-radius: 7px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-search {
+    flex: 1 1 auto;
+    background: var(--pink);
+}
+
+.btn-reset {
+    flex: 0 0 auto;
+    background: var(--navy);
+}
+
+.btn-search:hover,
+.btn-reset:hover {
+    filter: brightness(0.95);
+}
+
+/* 8. TABLE CONTAINER */
+.table-panel {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+}
+
+/* Only invoice rows scroll */
+.table-scroll {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #b8c9df #f2f6fb;
+}
+
+.table-scroll table,
+.table-panel table {
+    width: 100%;
+    min-width: 1250px;
+    margin: 0;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Sticky table heading */
+.table-scroll thead th,
+.table-panel thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 12px 7px;
+    color: var(--white);
+    background: var(--navy);
+    border-right: 1px solid #31527e;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.table-scroll tbody td,
+.table-panel tbody td {
+    padding: 7px 6px;
+    border-bottom: 1px solid #e4ebf4;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table-scroll tbody tr,
+.table-panel tbody tr {
+    height: 43px;
+}
+
+.table-scroll tbody tr:nth-child(even),
+.table-panel tbody tr:nth-child(even) {
+    background: #f1f6fc;
+}
+
+.table-scroll tbody tr:hover,
+.table-panel tbody tr:hover {
+    background: #e8f2ff;
+}
+
+/* Table column widths */
+.table-scroll th:nth-child(1),
+.table-scroll td:nth-child(1) {
+    width: 4%;
+}
+
+.table-scroll th:nth-child(2),
+.table-scroll td:nth-child(2) {
+    width: 10%;
+}
+
+.table-scroll th:nth-child(3),
+.table-scroll td:nth-child(3) {
+    width: 11%;
+}
+
+.table-scroll th:nth-child(4),
+.table-scroll td:nth-child(4) {
+    width: 13%;
+}
+
+.table-scroll th:nth-child(5),
+.table-scroll td:nth-child(5) {
+    width: 10%;
+}
+
+.table-scroll th:nth-child(6),
+.table-scroll td:nth-child(6) {
+    width: 11%;
+}
+
+.table-scroll th:nth-child(7),
+.table-scroll td:nth-child(7) {
+    width: 11%;
+}
+
+.table-scroll th:nth-child(8),
+.table-scroll td:nth-child(8) {
+    width: 8%;
+}
+
+.table-scroll th:nth-child(9),
+.table-scroll td:nth-child(9) {
+    width: 22%;
+}
+
+.amount {
+    text-align: center !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 9. PAYMENT STATUS */
+.status {
+    display: inline-block;
+    min-width: 105px;
+    padding: 7px 12px;
+    text-align: center;
+    border-radius: 7px;
+    font-weight: 700;
+    color: #875100;
+    background: #ffe28b;
+}
+
+.status.paid {
+    color: #075c30;
+    background: #99f5b9;
+}
+
+.status.partial {
+    color: #8d1717;
+    background: #ffaaa6;
+}
+
+.status.pending {
+    color: #875100;
+    background: #ffe28b;
+}
+
+.status.failed,
+.status.refunded {
+    color: #572579;
+    background: #e6d7f5;
+}
+
+/* 10. ACTION BUTTONS */
+.actions {
+    min-width: 0 !important;
+    text-align: center !important;
+    white-space: nowrap;
+}
+
+.action {
+    width: 62px;
+    min-width: 62px;
+    height: 31px;
+    min-height: 31px;
+    margin: 2px;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--white);
+    border: 0;
+    border-radius: 6px;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.15s;
+}
+
+.action:hover {
+    filter: brightness(0.94);
+    transform: translateY(-1px);
+}
+
+.action.view,
+.action.edit {
+    background: #087ce7;
+}
+
+.action.print {
+    background: var(--pink);
+}
+
+.action.pdf {
+    color: #101e34;
+    background: #ffca05;
+}
+
+.action i,
+.action svg {
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+}
+
+.empty {
+    padding: 28px;
+    color: #667995;
+    text-align: center;
+}
+
+/* 11. TABLE FOOTER AND PAGINATION */
+.table-footer {
+    position: relative;
+    z-index: 6;
+    flex: 0 0 auto;
+    min-height: 62px;
+    margin: 0;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+}
+
+.showing {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.showing select {
+    min-width: 70px;
+    height: 36px;
+    padding: 0 9px;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid #d4e0f0;
+    border-radius: 7px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pagination a,
+.pagination span {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid #d8e2f0;
+    border-radius: 6px;
+}
+
+.pagination a:hover {
+    border-color: var(--pink);
+}
+
+.pagination .current {
+    color: var(--white);
+    background: var(--pink);
+    border-color: var(--pink);
+}
+
+.pagination .disabled {
+    color: #a9b6c8;
+    background: #f7f9fc;
+}
+
+/* 12. FOOTER */
+.footer {
+    width: 100%;
+    min-height: 60px;
+    padding: 17px 23px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    color: var(--white);
+    background: var(--navy-dark);
+}
+
+.footer div {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.footer a {
+    color: var(--white);
+}
+
+.footer a:hover {
+    color: #ffca05;
+}
+
+/* 13. MODAL */
+.modal {
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    padding: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #071a34a8;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    width: min(480px, 100%);
+    padding: 25px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 15px 55px #0003;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--navy);
+}
+
+.modal-content p {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+.modal-close {
+    position: absolute;
+    top: 8px;
+    right: 13px;
+    border: 0;
+    background: transparent;
+    font-size: 29px;
+    cursor: pointer;
+}
+
+/* 14. LAPTOP */
+@media (max-width: 1500px) {
+    .topbar {
+        gap: 12px;
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .brand {
+        flex: 0 1 390px;
+        min-width: 300px;
+        gap: 10px;
+    }
+
+    .brand img {
+        flex-basis: 62px;
+        width: 62px;
+        height: 56px;
+    }
+
+    .brand strong {
+        font-size: 17px;
+    }
+
+    .brand small {
+        font-size: 11px;
+    }
+
+    .web-links {
+        flex: 0 1 155px;
+        min-width: 145px;
+        gap: 7px;
+        font-size: 11px;
+    }
+
+    .web-links i {
+        font-size: 23px;
+    }
+
+    .top-actions {
+        gap: 6px;
+    }
+
+    .nav-button {
+        min-height: 40px;
+        padding: 0 9px;
+        gap: 5px;
+        font-size: 11px;
+    }
+
+    .filter-panel {
+        grid-template-columns:
+            165px
+            repeat(3, minmax(120px, 1fr))
+            repeat(2, minmax(110px, 0.8fr))
+            minmax(130px, 0.9fr)
+            160px;
+        gap: 9px;
+    }
+
+    .filter-heading strong {
+        font-size: 12px;
+    }
+
+    .btn-search,
+    .btn-reset {
+        padding: 0 9px;
+        font-size: 11px;
+    }
+
+    .stat-card {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .stat-icon {
+        flex-basis: 48px;
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+
+    .stat-card strong {
+        font-size: 21px;
+    }
+}
+
+/* 15. TABLET */
+@media (max-width: 1100px) {
+    .topbar {
+        height: auto;
+        min-height: 88px;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        flex: 1 1 350px;
+    }
+
+    .web-links {
+        flex: 0 1 180px;
+        margin-right: 0;
+    }
+
+    .top-actions {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .page {
+        height: calc(100vh - 88px);
+    }
+
+    .stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .filter-panel {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .filter-heading,
+    .filter-buttons {
+        grid-column: 1 / -1;
+    }
+
+    .filter-buttons {
+        justify-content: flex-end;
+    }
+
+    .table-scroll table {
+        min-width: 1150px;
+    }
+}
+
+/* 16. MOBILE */
+@media (max-width: 768px) {
+    .topbar {
+        height: auto;
+        min-height: 70px;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .brand {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+
+    .brand img {
+        flex-basis: 54px;
+        width: 54px;
+        height: 50px;
+    }
+
+    .brand strong {
+        font-size: 18px;
+        white-space: normal;
+    }
+
+    .brand small {
+        text-align: left;
+    }
+
+    .web-links {
+        display: none;
+    }
+
+    .top-actions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .nav-button {
+        min-width: 0;
+        min-height: 40px;
+        padding: 8px 5px;
+        font-size: 11px;
+        white-space: normal;
+    }
+
+    .page {
+        height: calc(100vh - 70px);
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .hero {
+        min-height: 80px;
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .hero-title {
+        gap: 10px;
+    }
+
+    .hero-icon {
+        font-size: 30px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .hero p {
+        font-size: 12px;
+    }
+
+    .date-card {
+        flex: 0 1 150px;
+        min-width: 0;
+        padding: 10px;
+        gap: 8px;
+        font-size: 11px;
+    }
+
+    .date-card i {
+        font-size: 18px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .stat-card {
+        min-height: 85px;
+        padding: 10px;
+        gap: 9px;
+        border-radius: 10px;
+    }
+
+    .stat-icon {
+        flex-basis: 42px;
+        width: 42px;
+        height: 42px;
+        font-size: 19px;
+    }
+
+    .stat-card p {
+        font-size: 11px;
+    }
+
+    .stat-card strong {
+        font-size: 18px;
+    }
+
+    .stat-card small {
+        font-size: 10px;
+    }
+
+    .filter-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .filter-heading,
+    .filter-buttons {
+        grid-column: 1 / -1;
+    }
+
+    .filter-panel input,
+    .filter-panel select {
+        font-size: 12px;
+    }
+
+    .table-scroll table {
+        min-width: 1150px;
+    }
+
+    .table-footer {
+        flex-wrap: wrap;
+    }
+
+    .footer {
+        display: none;
+    }
+}
+
+/* 17. SMALL MOBILE */
+@media (max-width: 420px) {
+    .top-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stats,
+    .filter-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-heading,
+    .filter-buttons {
+        grid-column: 1;
+    }
+
+    .filter-buttons {
+        width: 100%;
+    }
+
+    .hero {
+        align-items: flex-start;
+    }
+
+    .hero h1 {
+        font-size: 21px;
+    }
+
+    .date-card {
+        display: none;
+    }
+
+    .table-footer {
+        align-items: flex-start;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
+
+/* 18. PRINT */
+@media print {
+    html,
+    body {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        background: var(--white);
+    }
+
+    .topbar,
+    .filter-panel,
+    .table-footer,
+    .footer,
+    .actions,
+    .date-card {
+        display: none !important;
+    }
+
+    .page {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: none;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .hero {
+        color: #000;
+        background: var(--white);
+        border: 1px solid #ccc;
+    }
+
+    .stats {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .table-panel {
+        display: block;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        border: 1px solid #ccc;
+    }
+
+    .table-scroll {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .table-scroll table {
+        width: 100%;
+        min-width: 0;
+        table-layout: auto;
+    }
+
+    .table-scroll thead th {
+        position: static;
+        color: #000;
+        background: #eee !important;
+    }
+
+    tr {
+        break-inside: avoid;
+    }
+}
+
+
+
+/* FIX: Invoice Preview Modal */
+#invoiceModal.invoice-preview-modal {
+    display: none;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999 !important;
+    background: rgba(0, 0, 0, 0.72);
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#invoiceModal.invoice-preview-modal.open {
+    display: flex !important;
+}
+
+#invoiceModal .invoice-preview-dialog {
+    display: flex;
+    flex-direction: column;
+    width: min(1000px, 96vw);
+    max-height: 92vh;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+#invoiceModal .invoice-preview-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px;
+    background: #0b2b58;
+    color: #fff;
+}
+
+#invoiceModal .invoice-preview-toolbar button {
+    margin-left: 5px;
+    padding: 9px 12px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#invoiceModal .invoice-preview-content {
+    overflow: auto;
+    padding: 20px;
+    background: #f3f6fb;
+}
+
+#invoiceModal .invoice-paper {
+    display: block;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #fff;
+    color: #102b58;
+}
+
+@media (max-width: 600px) {
+    #invoiceModal .invoice-preview-dialog {
+        width: 100%;
+        max-height: 96vh;
+    }
+
+    #invoiceModal .invoice-preview-content {
+        padding: 8px;
+    }
+
+    #invoiceModal .invoice-paper {
+        padding: 12px;
+    }
+
+    #invoiceModal .invoice-preview-toolbar {
+        flex-wrap: wrap;
+    }
+}
+
+
+
+/* =========================================
+   EDIT & DELETE BUTTONS
+   Existing design unchanged
+   ========================================= */
+
+/* Edit button — existing blue theme */
+.action.edit {
+    background: #087ce7;
+    color: #ffffff;
+    border: none;
+}
+
+/* Delete button — red theme */
+.action.delete {
+    background: #dc3545;
+    color: #ffffff;
+    border: none;
+}
+
+/* Keep buttons aligned with existing actions */
+.actions form {
+    display: inline-block;
+    margin: 2px;
+    padding: 0;
+    vertical-align: middle;
+}
+
+/* Hover effect */
+.action.edit:hover,
+.action.delete:hover {
+    filter: brightness(0.94);
+    transform: translateY(-1px);
+}
+
+/* Button icons */
+.action.edit i,
+.action.delete i {
+    font-size: 12px;
+}

@@ -1,0 +1,610 @@
+/* ==================================================
+   1. GLOBAL SETTINGS
+   Default spacing reset aur theme colours
+   ================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Website ke main colours */
+:root {
+    --navy: #062b59;
+    --pink: #ed008c;
+    --yellow: #ffcf00;
+    --blue: #0564e8;
+}
+
+/* Browser viewport ko poori tarah use karna */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Header, main aur footer ka vertical layout */
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--navy);
+    background: #ffffff;
+}
+
+/* =========================================================
+   2. HEADER
+   ========================================================= */
+
+.header {
+    flex: 0 0 10%;
+    min-height: 0;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 4px 2.5%;
+    background: var(--navy);
+    color: #ffffff;
+}
+
+.brand {
+    height: 100%;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 2px 0;
+    background: transparent;
+    text-decoration: none;
+}
+
+.brand img {
+    width: clamp(32px, 4.2vw, 65px);
+    height: 90%;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.brand-text {
+    min-width: 0;
+}
+
+.brand-text h1 {
+    color: #ffffff;
+    font-size: clamp(15px, 2.4vw, 36px);
+    line-height: 1.08;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.brand-text h1 span {
+    color: var(--yellow);
+}
+
+.brand-text p {
+    margin-top: 3px;
+    color: #ffffff;
+    font-size: clamp(9px, 1.3vw, 20px);
+    white-space: nowrap;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1vw, 16px);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: clamp(7px, 1vw, 15px);
+    border-radius: 12px;
+
+    color: #ffffff;
+    font-size: clamp(10px, 1.35vw, 20px);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.nav-link svg {
+    width: 1.35em;
+    height: 1.35em;
+    flex-shrink: 0;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 1.5;
+}
+
+/* Home Active */
+.nav-link.active {
+    background: var(--pink);
+}
+
+/* Create Bill */
+.create-bill-btn {
+    background: transparent;
+    color: #ffffff;
+}
+
+/* Create Bill Hover */
+.create-bill-btn:hover {
+    background: var(--pink);
+    color: #ffffff;
+}
+
+/* Login */
+.nav-link.login {
+    padding-left: clamp(10px, 1.7vw, 26px);
+    padding-right: clamp(10px, 1.7vw, 26px);
+    background: var(--yellow);
+    color: var(--navy);
+}
+
+
+/* ==================================================
+   3. MAIN CONTENT
+   Hero aur product grid ko available height dena
+   ================================================== */
+
+.main-content {
+    flex: 1 1 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    /* Main content se scrolling remove karna */
+    overflow: hidden;
+}
+
+/* ==================================================
+   4. HERO BANNER
+   banner.png mein text pehle se included hai.
+   Isliye hero ke andar extra text nahi dikhana.
+   ================================================== */
+
+/* ==================================================
+   4. HERO BANNER - ROUNDED CORNERS
+   ================================================== */
+
+/* HERO BANNER WITH ROUNDED CORNERS */
+
+.hero {
+    flex: 0 0 35%;
+    min-height: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    background-image: url("../images/banner_index.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 96% 96%;
+
+    border-radius: 20px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* ==================================================
+   5. PRODUCT GRID
+   ================================================== */
+
+.products {
+    flex: 1 1 0;
+    min-height: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+
+    column-gap: 1.4%;
+    row-gap: 2%;
+
+        padding: 8px 2.1% 15px;
+
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* Har product card ka layout */
+.product-card {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+    border-radius: 16px;
+
+    /* Light shadow */
+    box-shadow: 0 3px 10px rgba(0, 40, 90, 0.08);
+
+    background: #fce5f2;
+}
+
+/* Image ke liye card ka main area */
+.product-image {
+    flex: 1 1 0;
+    min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+/* Product image ka size */
+.product-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Product card ka bottom label */
+.product-label {
+    flex: 0 0 20%;
+    min-height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    padding: 3px 6px;
+    border-radius: 13px;
+
+    font-size: clamp(9px, 1.22vw, 19px);
+    font-weight: 700;
+    white-space: nowrap;
+
+    color: #ffffff;
+}
+
+/* Label text ko card ke andar rakhna */
+.product-label span {
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* Right-side circular arrow */
+.product-label b {
+    flex: 0 0 auto;
+
+    width: clamp(19px, 1.75vw, 27px);
+    height: clamp(19px, 1.75vw, 27px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #ffffff;
+
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+/* Pink cards */
+.pink .product-label {
+    background: var(--pink);
+}
+
+.pink .product-label b {
+    color: var(--pink);
+}
+
+/* Yellow cards */
+.yellow .product-label {
+    background: var(--yellow);
+    color: var(--navy);
+}
+
+.yellow .product-label b {
+    color: #d58c00;
+}
+
+/* Blue cards */
+.blue .product-label {
+    background: var(--blue);
+}
+
+.blue .product-label b {
+    color: var(--blue);
+}
+
+/* ==================================================
+   6. FOOTER
+   Copyright left aur footer links right
+   ================================================== */
+
+.footer {
+    /* Footer ki proportional height */
+    flex: 0 0 5%;
+    min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 0 2%;
+    background: var(--navy);
+    color: #ffffff;
+
+    font-size: clamp(10px, 1.1vw, 17px);
+}
+
+/* Copyright ko single line mein rakhna */
+.footer p {
+    white-space: nowrap;
+}
+
+/* Footer links ko horizontal rakhna */
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1.3vw, 20px);
+    white-space: nowrap;
+}
+
+/* Footer link styling */
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Vertical separators */
+.footer-links i {
+    font-style: normal;
+}
+
+/* ==================================================
+   MOBILE + TABLET
+   Same layout on both
+   ================================================== */
+
+@media screen and (max-width: 1024px) {
+
+    html,
+    body {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* HEADER */
+    .header {
+        flex: 0 0 auto;
+        width: 100%;
+        min-height: 64px;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 10px;
+    }
+
+    /* Logo and business name */
+    .brand {
+        display: flex;
+        flex: 1 1 auto;
+        width: auto;
+        height: auto;
+        min-width: 0;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 7px;
+        border-radius: 18px 0 18px 0;
+    }
+
+    .brand img {
+        display: block;
+        flex: 0 0 34px;
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+
+    .brand-text {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .brand-text h1 {
+        font-size: clamp(11px, 2.8vw, 17px);
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    .brand-text p {
+        margin-top: 2px;
+        font-size: clamp(8px, 1.8vw, 11px);
+        line-height: 1.2;
+        white-space: normal;
+    }
+
+    /* Login only */
+    .navigation {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .navigation .nav-link:not(.login) {
+        display: none !important;
+    }
+
+    .navigation .nav-link.login {
+        display: inline-flex !important;
+        flex: 0 0 38px;
+        width: 38px;
+        min-width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+        font-size: 0;
+    }
+
+    .navigation .nav-link.login .nav-icon {
+        display: inline-block;
+        font-size: 21px;
+    }
+
+    /* Main content scrolls naturally */
+    .main-content {
+        flex: 0 0 auto;
+        width: 100%;
+        min-height: 0;
+        height: auto;
+        overflow: visible;
+    }
+
+    /* Banner */
+    .hero {
+        flex: 0 0 auto;
+        width: calc(100% - 16px);
+        height: auto;
+        aspect-ratio: 3.2 / 1;
+        min-height: 0;
+        margin: 8px auto;
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    /* Product cards: always 2 columns */
+    .products {
+        flex: 0 0 auto;
+        display: grid;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+        grid-auto-rows: auto;
+        gap: 10px;
+        padding: 5px 10px 14px;
+        overflow: visible;
+    }
+
+    .product-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+        border-radius: 11px;
+    }
+
+    .product-image {
+        flex: 0 0 auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 1.2 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .product-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .product-label {
+        flex: 0 0 auto;
+        min-height: 36px;
+        padding: 5px;
+        gap: 4px;
+        border-radius: 8px;
+        font-size: clamp(10px, 2vw, 14px);
+        line-height: 1.2;
+        white-space: normal;
+    }
+
+    .product-label span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .product-label b {
+        flex: 0 0 20px;
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+        flex: 0 0 auto;
+        width: 100%;
+        min-height: 0;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 10px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .footer p {
+        white-space: normal;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 7px 10px;
+        white-space: normal;
+    }
+}
+
